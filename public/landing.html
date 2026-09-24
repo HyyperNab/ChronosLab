@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChronosLab — Live Demo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#0b0d10;color:#e7edf5;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+h1{font-size:1.75rem;font-weight:700;margin-bottom:.5rem;color:#e7edf5}
+.subtitle{color:#8a95a3;font-size:.95rem;margin-bottom:2.5rem}
+.demos{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
+.card{background:#0f1318;border:1px solid #1b2330;border-radius:8px;padding:1.5rem 2rem;width:320px;text-decoration:none;transition:all .2s ease}
+.card:hover{border-color:#2a3340;background:#131820;transform:translateY(-2px)}
+.card h2{font-size:1.1rem;font-weight:600;color:#e7edf5;margin-bottom:.5rem}
+.card p{font-size:.85rem;color:#8a95a3;line-height:1.5}
+.card .tag{display:inline-block;margin-top:.75rem;padding:2px 8px;border-radius:4px;font-size:.75rem;font-weight:600}
+.tag.demo{background:#1a2230;color:#a9b4c2;border:1px solid #2a3340}
+.tag.kinetic{background:#1a3a4a;color:#7ec8e3;border:1px solid #2a4a5a}
+.badges{margin-top:2rem;display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.badge{font-size:.75rem;color:#555;border:1px solid #1b2330;padding:2px 8px;border-radius:4px}
+footer{margin-top:2rem;font-size:.8rem;color:#555}
+a.github{color:#0066cc;text-decoration:none}
+a.github:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<h1>🔬 ChronosLab</h1>
+<p class="subtitle">Medical laboratory document intelligence — live demo</p>
+<div class="demos">
+<a class="card" href="index.html">
+<h2>Clinician Cockpit (Demo)</h2>
+<p>Synthetic lab data rendered as a chronological HTML cockpit. 3 panels, 8 analytes, color-coded flags.</p>
+<span class="tag demo">Quick demo</span>
+</a>
+<a class="card" href="kinetics.html">
+<h2>Full Kinetic Timeline</h2>
+<p>5 blood draws across 6 years (2020–2026), 3 languages (FR/EN/DE), 55 analytes, 8 panels, 19 flags. The real deal.</p>
+<span class="tag kinetic">Case study</span>
+</a>
+</div>
+<div class="badges">
+<span class="badge">Python 3.10+</span>
+<span class="badge">FR · EN · DE</span>
+<span class="badge">304-entry normalization</span>
+<span class="badge">Constitutional governance</span>
+<span class="badge">MIT License</span>
+</div>
+<footer><a class="github" href="https://github.com/HyyperNab/ChronosLab">github.com/HyyperNab/ChronosLab</a> · v1.6.0</footer>
+</body>
+</html>

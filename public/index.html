@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChronosLab — CASE-001-DEMO</title>
+    <style>
+        :root {
+            --forest-navy: #0a1f2e;
+            --forest-navy-2: #06202b;
+            --low-color: #c1121f;
+            --high-color: #0033cc;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0b0d10;
+            color: #e7edf5;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            color: #e7edf5;
+        }
+
+        /* Index banner (v1.6.0) */
+        .index-banner {
+            background: #0f1318;
+            border: 1px solid #1b2330;
+            border-radius: 6px;
+            padding: 10px 12px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .index-banner a {
+            background: #1a2230;
+            border: 1px solid #2a3340;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #a9b4c2;
+            font-size: 0.85rem;
+        }
+        .index-banner a:hover { background: #243040; color: #e7edf5; }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: #0f1318;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #1b2330;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        thead th {
+            background: #0f1318;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .var-col {
+            min-width: 200px;
+            position: sticky;
+            left: 0;
+            background: #0f1318;
+            z-index: 5;
+        }
+
+        thead .var-col {
+            z-index: 15;
+        }
+
+        .date-col {
+            min-width: 100px;
+            font-size: 13px;
+        }
+
+        .empty {
+            color: #555;
+            text-align: center;
+        }
+
+        .var {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .unit {
+            color: #8a95a3;
+            font-weight: normal;
+            font-size: 13px;
+        }
+
+        .refline {
+            font-size: 11px;
+            color: #a9b4c2;
+        }
+
+        .val {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .val.low {
+            color: var(--low-color);
+            font-weight: 800;
+        }
+
+        .val.high {
+            color: var(--high-color);
+            font-weight: 800;
+        }
+
+        .val.normal {
+            color: #e7edf5;
+        }
+
+        details.panel {
+            margin-bottom: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        details.panel summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 12px 16px;
+            background: linear-gradient(90deg, var(--forest-navy), var(--forest-navy-2));
+            color: #e7edf5;
+            font-weight: 800;
+            font-size: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            user-select: none;
+        }
+
+        details.panel summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .chev {
+            transition: transform 0.15s ease;
+            display: inline-block;
+            font-size: 12px;
+        }
+
+        details.panel[open] .chev {
+            transform: rotate(90deg);
+        }
+
+        .panelBody {
+            padding: 0;
+            overflow-x: auto;
+        }
+
+        @media print {
+            .index-banner { display: none; }
+            details.panel { page-break-inside: avoid; }
+            details.panel > .panelBody { display: block !important; }
+        }
+    </style>
+</head>
+<body>
+    <h1>ChronosLab — CASE-001-DEMO</h1>
+    <nav class="index-banner"><a href="#nfs">Hémogramme (NFS)</a><a href="#renal">Bilan Rénal</a><a href="#hepatic">Bilan Hépatique</a></nav>
+    
+        <details class="panel" id="nfs" open>
+            <summary>
+                <span class="chev">▶</span> Hémogramme (NFS)
+            </summary>
+            <div class="panelBody">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="var-col">Variable</th>
+                            <th class="date-col">2024-01-15</th><th class="date-col">2024-02-20</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th class="var-col"><div class="var"><div><b>Hemoglobin</b> <span class="unit">(g/dL)</span></div><span class="refline">ref: <b>12–16</b></span></div></th><td data-page="1" data-doc="DOC-001" data-confidence="1.00"><span class="val normal">13.2</span></td><td data-page="1" data-doc="DOC-001" data-confidence="1.00"><span class="val low">11.8</span></td></tr><tr><th class="var-col"><div class="var"><div><b>WBC</b> <span class="unit">(10^9/L)</span></div><span class="refline">ref: <b>4–11</b></span></div></th><td data-page="1" data-doc="DOC-001" data-confidence="1.00"><span class="val normal">8.5</span></td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>Platelets</b> <span class="unit">(10^9/L)</span></div><span class="refline">ref: <b>150–400</b></span></div></th><td data-page="1" data-doc="DOC-001" data-confidence="1.00"><span class="val normal">245</span></td><td class="empty">—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        
+        <details class="panel" id="renal" open>
+            <summary>
+                <span class="chev">▶</span> Bilan Rénal
+            </summary>
+            <div class="panelBody">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="var-col">Variable</th>
+                            <th class="date-col">2024-01-15</th><th class="date-col">2024-02-20</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th class="var-col"><div class="var"><div><b>Sodium</b> <span class="unit">(mmol/L)</span></div><span class="refline">ref: <b>135–145</b></span></div></th><td data-page="1" data-doc="DOC-001" data-confidence="1.00"><span class="val normal">138</span></td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>Potassium</b> <span class="unit">(mmol/L)</span></div><span class="refline">ref: <b>3.5–5</b></span></div></th><td data-page="1" data-doc="DOC-001" data-confidence="1.00"><span class="val normal">4.2</span></td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>Creatinine</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>0.7–1.3</b></span></div></th><td data-page="1" data-doc="DOC-001" data-confidence="1.00"><span class="val normal">0.9</span></td><td data-page="1" data-doc="DOC-001" data-confidence="1.00"><span class="val high">1.5</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        
+        <details class="panel" id="hepatic" open>
+            <summary>
+                <span class="chev">▶</span> Bilan Hépatique
+            </summary>
+            <div class="panelBody">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="var-col">Variable</th>
+                            <th class="date-col">2024-01-15</th><th class="date-col">2024-02-20</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th class="var-col"><div class="var"><div><b>ALT</b> <span class="unit">(U/L)</span></div><span class="refline">ref: <b>&lt; 40 U/L</b></span></div></th><td data-page="2" data-doc="DOC-001" data-confidence="1.00"><span class="val normal">25</span></td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>AST</b> <span class="unit">(U/L)</span></div><span class="refline">ref: <b>&lt; 40 U/L</b></span></div></th><td data-page="2" data-doc="DOC-001" data-confidence="1.00"><span class="val normal">22</span></td><td class="empty">—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        
+</body>
+</html>
