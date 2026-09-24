@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChronosLab — Demo Patient</title>
+    <style>
+        :root {
+            --forest-navy: #0a1f2e;
+            --forest-navy-2: #06202b;
+            --low-color: #c1121f;
+            --high-color: #0033cc;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0b0d10;
+            color: #e7edf5;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            color: #e7edf5;
+        }
+
+        /* Index banner (v1.6.0) */
+        .index-banner {
+            background: #0f1318;
+            border: 1px solid #1b2330;
+            border-radius: 6px;
+            padding: 10px 12px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .index-banner a {
+            background: #1a2230;
+            border: 1px solid #2a3340;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #a9b4c2;
+            font-size: 0.85rem;
+        }
+        .index-banner a:hover { background: #243040; color: #e7edf5; }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: #0f1318;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #1b2330;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        thead th {
+            background: #0f1318;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .var-col {
+            min-width: 200px;
+            position: sticky;
+            left: 0;
+            background: #0f1318;
+            z-index: 5;
+        }
+
+        thead .var-col {
+            z-index: 15;
+        }
+
+        .date-col {
+            min-width: 100px;
+            font-size: 13px;
+        }
+
+        .empty {
+            color: #555;
+            text-align: center;
+        }
+
+        .var {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .unit {
+            color: #8a95a3;
+            font-weight: normal;
+            font-size: 13px;
+        }
+
+        .refline {
+            font-size: 11px;
+            color: #a9b4c2;
+        }
+
+        .val {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .val.low {
+            color: var(--low-color);
+            font-weight: 800;
+        }
+
+        .val.high {
+            color: var(--high-color);
+            font-weight: 800;
+        }
+
+        .val.normal {
+            color: #e7edf5;
+        }
+
+        details.panel {
+            margin-bottom: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        details.panel summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 12px 16px;
+            background: linear-gradient(90deg, var(--forest-navy), var(--forest-navy-2));
+            color: #e7edf5;
+            font-weight: 800;
+            font-size: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            user-select: none;
+        }
+
+        details.panel summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .chev {
+            transition: transform 0.15s ease;
+            display: inline-block;
+            font-size: 12px;
+        }
+
+        details.panel[open] .chev {
+            transform: rotate(90deg);
+        }
+
+        .panelBody {
+            padding: 0;
+            overflow-x: auto;
+        }
+
+        @media print {
+            .index-banner { display: none; }
+            details.panel { page-break-inside: avoid; }
+            details.panel > .panelBody { display: block !important; }
+        }
+    </style>
+</head>
+<body>
+    <h1>ChronosLab — Demo Patient</h1>
+    <nav class="index-banner"><a href="#nfs">Complete Blood Count (NFS)</a><a href="#crp">CRP</a><a href="#renal">Renal</a><a href="#hepatic">Hepatic</a><a href="#lipids">Lipid Panel</a><a href="#glucose-a1c">Glucose / HbA1c</a><a href="#thyroid">Thyroid</a><a href="#misc">Other</a></nav>
+    
+        <details class="panel" id="nfs" open>
+            <summary>
+                <span class="chev">▶</span> Complete Blood Count (NFS)
+            </summary>
+            <div class="panelBody">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="var-col">Variable</th>
+                            <th class="date-col">2020-01-03</th><th class="date-col">2020-12-21</th><th class="date-col">2024-12-30</th><th class="date-col">2026-01-08</th><th class="date-col">2026-09-18</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th class="var-col"><div class="var"><div><b>Hemoglobin</b> <span class="unit">(g/dL)</span></div><span class="refline">ref: <b>13.5–17.5</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">14.7</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">15.2</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">15.4</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">15.1</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">15.6</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Hematocrit</b> <span class="unit">(%)</span></div><span class="refline">ref: <b>40–53</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">44</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">46</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">43.7</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">44.9</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">45.3</span></td></tr><tr><th class="var-col"><div class="var"><div><b>MCH</b> <span class="unit">(pg)</span></div><span class="refline">ref: <b>28–33</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">30.6</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">29.9</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">30.2</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">30</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">29.7</span></td></tr><tr><th class="var-col"><div class="var"><div><b>MCHC</b> <span class="unit">(g/dL)</span></div><span class="refline">ref: <b>32–36</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">33.4</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">33.1</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">35.2</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">34</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">34.4</span></td></tr><tr><th class="var-col"><div class="var"><div><b>MCV</b> <span class="unit">(fL)</span></div><span class="refline">ref: <b>80–96</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">92</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">90</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">86</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">89</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">86.3</span></td></tr><tr><th class="var-col"><div class="var"><div><b>WBC</b> <span class="unit">(/µL)</span></div><span class="refline">ref: <b>3500–9800</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">6700</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">5400</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">5820</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">5500</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">5780</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Neutrophils</b> <span class="unit">(/µL)</span></div><span class="refline">ref: <b>1800–6200</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">3800</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">2100</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">2650</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val low">1650</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">2780</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Lymphocytes</b> <span class="unit">(/µL)</span></div><span class="refline">ref: <b>1100–3200</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">2500</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">3000</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">2720</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val high">3410</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">2500</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Monocytes</b> <span class="unit">(/µL)</span></div><span class="refline">ref: <b>250–850</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">300</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val low">100</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">250</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">275</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">340</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Eosinophils</b> <span class="unit">(/µL)</span></div><span class="refline">ref: <b>35–300</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">200</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">200</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">190</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">165</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">130</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Basophils</b> <span class="unit">(/µL)</span></div><span class="refline">ref: <b>10–80</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val low">0</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val low">0</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">10</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val low">0</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">30</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Platelets</b> <span class="unit">(/nL)</span></div><span class="refline">ref: <b>140–360</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">232</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">217</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">224</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">254</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">218</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        
+        <details class="panel" id="crp" open>
+            <summary>
+                <span class="chev">▶</span> CRP
+            </summary>
+            <div class="panelBody">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="var-col">Variable</th>
+                            <th class="date-col">2020-01-03</th><th class="date-col">2020-12-21</th><th class="date-col">2024-12-30</th><th class="date-col">2026-01-08</th><th class="date-col">2026-09-18</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th class="var-col"><div class="var"><div><b>CRP</b> <span class="unit">(mg/L)</span></div><span class="refline">ref: <b>&lt; 5.0</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">3</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val high">6</span></td><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">0.86</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">0.7</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        
+        <details class="panel" id="renal" open>
+            <summary>
+                <span class="chev">▶</span> Renal
+            </summary>
+            <div class="panelBody">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="var-col">Variable</th>
+                            <th class="date-col">2020-01-03</th><th class="date-col">2020-12-21</th><th class="date-col">2024-12-30</th><th class="date-col">2026-01-08</th><th class="date-col">2026-09-18</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th class="var-col"><div class="var"><div><b>Creatinine</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>&lt; 1.20</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">1.09</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">0.85</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">0.86</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Urea</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>&lt; 50</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">24</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Calcium</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>—</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">9.4</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>Magnesium</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>—</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">1.94</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        
+        <details class="panel" id="hepatic" open>
+            <summary>
+                <span class="chev">▶</span> Hepatic
+            </summary>
+            <div class="panelBody">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="var-col">Variable</th>
+                            <th class="date-col">2020-01-03</th><th class="date-col">2020-12-21</th><th class="date-col">2024-12-30</th><th class="date-col">2026-01-08</th><th class="date-col">2026-09-18</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th class="var-col"><div class="var"><div><b>ALT</b> <span class="unit">(U/L)</span></div><span class="refline">ref: <b>10–50</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">10</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">20</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">32</span></td></tr><tr><th class="var-col"><div class="var"><div><b>AST</b> <span class="unit">(U/L)</span></div><span class="refline">ref: <b>10–50</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">18</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">15</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">18</span></td></tr><tr><th class="var-col"><div class="var"><div><b>GGT</b> <span class="unit">(U/L)</span></div><span class="refline">ref: <b>&lt; 60</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">23</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        
+        <details class="panel" id="lipids" open>
+            <summary>
+                <span class="chev">▶</span> Lipid Panel
+            </summary>
+            <div class="panelBody">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="var-col">Variable</th>
+                            <th class="date-col">2020-01-03</th><th class="date-col">2020-12-21</th><th class="date-col">2024-12-30</th><th class="date-col">2026-01-08</th><th class="date-col">2026-09-18</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th class="var-col"><div class="var"><div><b>Cholesterol Total</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>&lt; 200</b></span></div></th><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">172</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val high">208</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">176</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">186</span></td></tr><tr><th class="var-col"><div class="var"><div><b>HDL</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>&gt; 40</b></span></div></th><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">62</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">52</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">60</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">57</span></td></tr><tr><th class="var-col"><div class="var"><div><b>LDL</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>&lt; 116</b></span></div></th><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">101</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val high">146</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">100</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val high">121</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Triglycerides</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>&lt; 200</b></span></div></th><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">47</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">49</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">66</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">43</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        
+        <details class="panel" id="glucose-a1c" open>
+            <summary>
+                <span class="chev">▶</span> Glucose / HbA1c
+            </summary>
+            <div class="panelBody">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="var-col">Variable</th>
+                            <th class="date-col">2020-01-03</th><th class="date-col">2020-12-21</th><th class="date-col">2024-12-30</th><th class="date-col">2026-01-08</th><th class="date-col">2026-09-18</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th class="var-col"><div class="var"><div><b>Glucose</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>55–100</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">92</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">94</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">95</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">85</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">90</span></td></tr><tr><th class="var-col"><div class="var"><div><b>HbA1c</b> <span class="unit">(%)</span></div><span class="refline">ref: <b>4.4–5.6</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val high">5.7</span></td><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">5.2</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">4.8</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">5.2</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        
+        <details class="panel" id="thyroid" open>
+            <summary>
+                <span class="chev">▶</span> Thyroid
+            </summary>
+            <div class="panelBody">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="var-col">Variable</th>
+                            <th class="date-col">2020-01-03</th><th class="date-col">2020-12-21</th><th class="date-col">2024-12-30</th><th class="date-col">2026-01-08</th><th class="date-col">2026-09-18</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th class="var-col"><div class="var"><div><b>TSH</b> <span class="unit">(mU/L)</span></div><span class="refline">ref: <b>0.27–4.2</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">1.18</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">1.43</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">2.82</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">4</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">2.36</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        
+        <details class="panel" id="misc" open>
+            <summary>
+                <span class="chev">▶</span> Other
+            </summary>
+            <div class="panelBody">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="var-col">Variable</th>
+                            <th class="date-col">2020-01-03</th><th class="date-col">2020-12-21</th><th class="date-col">2024-12-30</th><th class="date-col">2026-01-08</th><th class="date-col">2026-09-18</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th class="var-col"><div class="var"><div><b>Neutrophils %</b> <span class="unit">(%)</span></div><span class="refline">ref: <b>43–75</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">56</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val low">38</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">45.5</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val low">30</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">48.1</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Lymphocytes %</b> <span class="unit">(%)</span></div><span class="refline">ref: <b>16–45</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">37</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val high">56</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val high">46.8</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val high">62</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">43.3</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Monocytes %</b> <span class="unit">(%)</span></div><span class="refline">ref: <b>2–12</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">4</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">2</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">4.1</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">5</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">5.9</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Eosinophils %</b> <span class="unit">(%)</span></div><span class="refline">ref: <b>0.4–6.6</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">3</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">4</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">3.3</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">3</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">2.2</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Basophils %</b> <span class="unit">(%)</span></div><span class="refline">ref: <b>0.3–1.5</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val low">0</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val low">0</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">0.3</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val low">0</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">0.5</span></td></tr><tr><th class="var-col"><div class="var"><div><b>RBC</b> <span class="unit">(10⁶/µL)</span></div><span class="refline">ref: <b>4.5–5.9</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">4.81</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">5.09</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">5.09</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">5.05</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">5.3</span></td></tr><tr><th class="var-col"><div class="var"><div><b>ESR 1h</b> <span class="unit">(mm)</span></div><span class="refline">ref: <b>0–15</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">2</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">4</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">6</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">2</span></td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>Vitamin D</b> <span class="unit">(ng/mL)</span></div><span class="refline">ref: <b>30–100</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val low">10</span></td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">37</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>FT4</b> <span class="unit">(pmol/L)</span></div><span class="refline">ref: <b>12–22</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val low">10</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>HBsAg</b> <span class="unit">()</span></div><span class="refline">ref: <b>negative</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">Negative</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">negative</span></td></tr><tr><th class="var-col"><div class="var"><div><b>HIV</b> <span class="unit">()</span></div><span class="refline">ref: <b>negative</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">Negative</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>HCV Antibody</b> <span class="unit">()</span></div><span class="refline">ref: <b>negative</b></span></div></th><td data-page="1" data-doc="DOC-HIST-1" data-confidence="1.00"><span class="val normal">Negative</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">negative</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Non-HDL Cholesterol</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>Target depend.</b></span></div></th><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-2" data-confidence="1.00"><span class="val normal">110</span></td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val normal">156</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">116</span></td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">129</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Uric Acid</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>3.5–7</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val low">3.2</span></td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">3.5</span></td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>Testosterone</b> <span class="unit">(ng/mL)</span></div><span class="refline">ref: <b>2.8–8</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val high">8.24</span></td><td class="empty">—</td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>Prolactin</b> <span class="unit">(ng/mL)</span></div><span class="refline">ref: <b>4–15.2</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-3" data-confidence="1.00"><span class="val high">17.46</span></td><td class="empty">—</td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>ESR 2h</b> <span class="unit">(mm)</span></div><span class="refline">ref: <b>0–20</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">6</span></td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>H pylori</b> <span class="unit">()</span></div><span class="refline">ref: <b>negative</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-HIST-4" data-confidence="1.00"><span class="val normal">Negative</span></td><td class="empty">—</td></tr><tr><th class="var-col"><div class="var"><div><b>EVB</b> <span class="unit">(%)</span></div><span class="refline">ref: <b>11.5–14.5</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">13.2</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Apolipoprotein A1</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>104–202</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">147</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Apolipoprotein B</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>66–144</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">88</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Fasting Insulin</b> <span class="unit">(µU/mL)</span></div><span class="refline">ref: <b>2.6–24.9</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">11.4</span></td></tr><tr><th class="var-col"><div class="var"><div><b>HbA1c IFCC</b> <span class="unit">(mmol/mol)</span></div><span class="refline">ref: <b>25–38</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">33</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Mean Glucose</b> <span class="unit">(mg/dL)</span></div><span class="refline">ref: <b>80–114</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">103</span></td></tr><tr><th class="var-col"><div class="var"><div><b>eGFR CKD-EPI</b> <span class="unit">(mL/min)</span></div><span class="refline">ref: <b>&gt; 90</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">112</span></td></tr><tr><th class="var-col"><div class="var"><div><b>eGFR MDRD</b> <span class="unit">(mL/min)</span></div><span class="refline">ref: <b>&gt; 68</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">101</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Ferritin</b> <span class="unit">(ng/mL)</span></div><span class="refline">ref: <b>30–400</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">127</span></td></tr><tr><th class="var-col"><div class="var"><div><b>Vitamin B12</b> <span class="unit">(ng/L)</span></div><span class="refline">ref: <b>197–771</b></span></div></th><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td data-page="1" data-doc="DOC-2026-09-18" data-confidence="1.00"><span class="val normal">658</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+        
+
+<!-- ANNOTATIONS (supplementary - NOT part of constitutional cockpit output) -->
+<div style="max-width:100%;margin:2rem 0 0 0;padding:0;">
+  <div style="background:linear-gradient(90deg,#0a1f2e,#06202b);padding:12px 16px;border-radius:8px 8px 0 0;color:#e7edf5;font-weight:800;font-size:15px;display:flex;gap:10px;align-items:center;">
+    <span>📊</span> Supplementary Annotations — Calculated Indices & Clinical Context
+  </div>
+  <div style="background:#0f1318;border:1px solid #1b2330;border-top:none;border-radius:0 0 8px 8px;padding:16px 20px;">
+    <p style="font-size:11px;color:#555;margin:0 0 16px 0;padding:8px 12px;background:#1a1410;border:1px solid #2a2010;border-radius:4px;">
+      ⚠️ These annotations are <strong>not</strong> part of the ChronosLab constitutional cockpit output.
+      The constitution forbids statistics, calculated indices, and clinical interpretation in the rendered cockpit
+      ("silence over speculation"). These are provided here as supplementary context for the demo only.
+    </p>
+    <h3 style="color:#7ec8e3;font-size:13px;font-weight:700;margin:0 0 10px 0;text-transform:uppercase;letter-spacing:0.5px;">Metabolic & Insulin Resistance Indices</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;">
+      <thead><tr style="background:#0a1018;">
+        <th style="padding:6px 10px;text-align:left;border:1px solid #1b2330;color:#8a95a3;">Index</th>
+        <th style="padding:6px 10px;text-align:center;border:1px solid #1b2330;color:#8a95a3;">Formula</th>
+        <th style="padding:6px 10px;text-align:center;border:1px solid #1b2330;color:#8a95a3;">Result</th>
+        <th style="padding:6px 10px;text-align:center;border:1px solid #1b2330;color:#8a95a3;">Reference</th>
+        <th style="padding:6px 10px;text-align:left;border:1px solid #1b2330;color:#8a95a3;">Interpretation</th>
+      </tr></thead>
+      <tbody>
+        <tr><td style="padding:6px 10px;border:1px solid #1b2330;color:#e7edf5;font-weight:600;">HOMA-IR</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#8a95a3;font-family:monospace;font-size:11px;">(90 × 11.4) / 405</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#3399ff;font-weight:700;">2.53</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#8a95a3;">&lt;1.0 optimal</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#a9b4c2;">Mild insulin resistance (1.9–2.5). Compensatory hyperinsulinemia despite normal HbA1c (5.2%) and glucose (90 mg/dL).</td></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #1b2330;color:#e7edf5;font-weight:600;">QUICKI</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#8a95a3;font-family:monospace;font-size:11px;">1 / (log10(90) + log10(11.4))</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#3399ff;font-weight:700;">0.332</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#8a95a3;">&gt;0.339 optimal</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#a9b4c2;">Corroborates early insulin resistance (&lt;0.339).</td></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #1b2330;color:#e7edf5;font-weight:600;">TyG Index</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#8a95a3;font-family:monospace;font-size:11px;">ln(43 × 90 / 2)</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#e7edf5;font-weight:700;">7.57</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#8a95a3;">&lt;8.5 favorable</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#a9b4c2;">Highly favorable. Driven by extremely low triglycerides (43 mg/dL).</td></tr>
+      </tbody>
+    </table>
+    <h3 style="color:#7ec8e3;font-size:13px;font-weight:700;margin:0 0 10px 0;text-transform:uppercase;letter-spacing:0.5px;">Cardiovascular & Atherogenic Risk Ratios</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;">
+      <thead><tr style="background:#0a1018;">
+        <th style="padding:6px 10px;text-align:left;border:1px solid #1b2330;color:#8a95a3;">Ratio</th>
+        <th style="padding:6px 10px;text-align:center;border:1px solid #1b2330;color:#8a95a3;">Calculation</th>
+        <th style="padding:6px 10px;text-align:center;border:1px solid #1b2330;color:#8a95a3;">Result</th>
+        <th style="padding:6px 10px;text-align:center;border:1px solid #1b2330;color:#8a95a3;">Target</th>
+        <th style="padding:6px 10px;text-align:left;border:1px solid #1b2330;color:#8a95a3;">Assessment</th>
+      </tr></thead>
+      <tbody>
+        <tr><td style="padding:6px 10px;border:1px solid #1b2330;color:#e7edf5;font-weight:600;">TG / HDL</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#8a95a3;font-family:monospace;font-size:11px;">43 / 57</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#e7edf5;font-weight:700;">0.75</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#8a95a3;">&lt;1.5</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#a9b4c2;">Optimal. Strong surrogate for low small-dense LDL.</td></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #1b2330;color:#e7edf5;font-weight:600;">ApoB / ApoA1</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#8a95a3;font-family:monospace;font-size:11px;">88 / 147</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#e7edf5;font-weight:700;">0.60</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#8a95a3;">&lt;0.80</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#a9b4c2;">Low risk.</td></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #1b2330;color:#e7edf5;font-weight:600;">LDL / HDL</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#8a95a3;font-family:monospace;font-size:11px;">121 / 57</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#e7edf5;font-weight:700;">2.12</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#8a95a3;">&lt;3.0</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#a9b4c2;">Optimal.</td></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #1b2330;color:#e7edf5;font-weight:600;">Castelli I (TC/HDL)</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#8a95a3;font-family:monospace;font-size:11px;">186 / 57</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#e7edf5;font-weight:700;">3.26</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#8a95a3;">&lt;4.0</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#a9b4c2;">Optimal.</td></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #1b2330;color:#e7edf5;font-weight:600;">Remnant Chol.</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#8a95a3;font-family:monospace;font-size:11px;">186−57−121</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#e7edf5;font-weight:700;">8.0</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#8a95a3;">&lt;30 mg/dL</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#a9b4c2;">Optimal. Low atherogenic remnant particles.</td></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #1b2330;color:#e7edf5;font-weight:600;">ApoB / LDL-C</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#8a95a3;font-family:monospace;font-size:11px;">88 / 121</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#e7edf5;font-weight:700;">0.73</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#8a95a3;">&lt;0.80</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#a9b4c2;">Low particle density risk.</td></tr>
+      </tbody>
+    </table>
+    <h3 style="color:#7ec8e3;font-size:13px;font-weight:700;margin:0 0 10px 0;text-transform:uppercase;letter-spacing:0.5px;">Hepatic Ratio</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;">
+      <thead><tr style="background:#0a1018;">
+        <th style="padding:6px 10px;text-align:left;border:1px solid #1b2330;color:#8a95a3;">Ratio</th>
+        <th style="padding:6px 10px;text-align:center;border:1px solid #1b2330;color:#8a95a3;">Calculation</th>
+        <th style="padding:6px 10px;text-align:center;border:1px solid #1b2330;color:#8a95a3;">Result</th>
+        <th style="padding:6px 10px;text-align:left;border:1px solid #1b2330;color:#8a95a3;">Interpretation</th>
+      </tr></thead>
+      <tbody>
+        <tr><td style="padding:6px 10px;border:1px solid #1b2330;color:#e7edf5;font-weight:600;">De Ritis (AST/ALT)</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#8a95a3;font-family:monospace;font-size:11px;">18 / 32</td><td style="padding:6px 10px;border:1px solid #1b2330;text-align:center;color:#e7edf5;font-weight:700;">0.56</td><td style="padding:6px 10px;border:1px solid #1b2330;color:#a9b4c2;">Ratio &lt;1.0 with normal enzymes — no active hepatocellular injury.</td></tr>
+      </tbody>
+    </table>
+    <h3 style="color:#7ec8e3;font-size:13px;font-weight:700;margin:0 0 10px 0;text-transform:uppercase;letter-spacing:0.5px;">Key Clinical Context</h3>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="background:#0a1018;border:1px solid #1b2330;border-left:3px solid #3399ff;border-radius:4px;padding:10px 14px;">
+        <strong style="color:#e7edf5;font-size:12px;">Insulin Resistance Discrepancy</strong>
+        <p style="color:#a9b4c2;font-size:11px;margin:4px 0 0 0;line-height:1.5;">HbA1c (5.2%) and triglycerides (43 mg/dL) suggest metabolic health, but fasting insulin (11.4 µU/mL) pushes HOMA-IR to 2.53 — signaling compensatory hyperinsulinemia to maintain normal glycemic control.</p>
+      </div>
+      <div style="background:#0a1018;border:1px solid #1b2330;border-left:3px solid #4a9;border-radius:4px;padding:10px 14px;">
+        <strong style="color:#e7edf5;font-size:12px;">LDL-C vs Particle Count Discordance</strong>
+        <p style="color:#a9b4c2;font-size:11px;margin:4px 0 0 0;line-height:1.5;">LDL-C (121 mg/dL) is slightly above baseline (&lt;116 mg/dL). However, ApoB (88 mg/dL) and TG/HDL ratio (0.75) indicate low atherogenic particle numbers and low small-dense LDL fraction — resulting in a low overall atherogenic risk profile despite the borderline LDL.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

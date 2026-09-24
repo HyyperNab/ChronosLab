@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChronosLab — Live Demo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#0b0d10;color:#e7edf5;min-height:100vh;padding:2rem 1rem}
+.wrap{max-width:800px;margin:0 auto}
+.hero{text-align:center;margin-bottom:2.5rem}
+.hero h1{font-size:2.2rem;font-weight:800;color:#e7edf5;margin-bottom:.3rem}
+.hero .subtitle{color:#8a95a3;font-size:1rem}
+.showcase{display:flex;gap:1rem;margin-bottom:2rem;align-items:stretch}
+.before,.after{flex:1;border-radius:8px;overflow:hidden;border:1px solid #1b2330}
+.before-label,.after-label{padding:8px 14px;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.5px}
+.before-label{background:#3e1616;color:#ff8b8b}
+.after-label{background:#1a3a4a;color:#7ec8e3}
+.before-body,.after-body{padding:14px;background:#0f1318;min-height:180px;display:flex;flex-direction:column;gap:8px}
+.before-body .messy-pdf{background:#1a2230;border:1px solid #2a3340;border-radius:4px;padding:8px 10px;font-size:.72rem;color:#666;line-height:1.4}
+.before-body .messy-pdf .lang{font-size:.65rem;color:#c1121f;font-weight:700}
+.before-body .messy-pdf .unit{font-size:.65rem;color:#8a95a3}
+.after-body .table-mini{font-size:.72rem;color:#a9b4c2}
+.after-body .table-mini .row{display:flex;gap:4px;padding:3px 0;border-bottom:1px solid #1b2330}
+.after-body .table-mini .row:last-child{border:none}
+.after-body .table-mini .name{flex:0 0 80px;color:#e7edf5;font-weight:600}
+.after-body .table-mini .val{flex:1;text-align:center}
+.after-body .table-mini .val.high{color:#3399ff;font-weight:700}
+.after-body .table-mini .val.low{color:#c1121f;font-weight:700}
+.after-body .table-mini .val.normal{color:#e7edf5}
+.after-body .table-mini .val.miss{color:#555}
+.after-body .table-mini .date{flex:0 0 50px;text-align:center;color:#555;font-size:.65rem}
+.showcase .arrow-col{display:flex;align-items:center;justify-content:center;color:#555;font-size:1.5rem}
+.section-title{font-size:1.1rem;font-weight:700;color:#e7edf5;margin:2rem 0 .8rem;text-align:center}
+.steps{display:flex;flex-direction:column;gap:0;margin-bottom:2rem}
+.step{display:flex;gap:14px;align-items:flex-start;padding:14px;background:#0f1318;border:1px solid #1b2330;border-radius:8px}
+.step:not(:last-child){margin-bottom:-1px;border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-color:#1b2330}
+.step .num{flex:0 0 32px;height:32px;width:32px;border-radius:50%;background:linear-gradient(135deg,#0a1f2e,#1a3a4a);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;color:#7ec8e3}
+.step .content h3{font-size:.9rem;font-weight:600;color:#e7edf5;margin-bottom:3px}
+.step .content p{font-size:.82rem;color:#8a95a3;line-height:1.5}
+.output-box{background:#0f1318;border:1px solid #1b2330;border-radius:8px;padding:16px;margin-bottom:2rem}
+.output-box h3{font-size:.9rem;font-weight:600;color:#e7edf5;margin-bottom:8px}
+.output-box p{font-size:.82rem;color:#8a95a3;line-height:1.5;margin-bottom:8px}
+.output-box .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:.78rem}
+.output-box .legend span{display:flex;align-items:center;gap:5px;color:#8a95a3}
+.output-box .legend .swatch{width:12px;height:12px;border-radius:2px;display:inline-block}
+.output-box .legend .sw-red{background:#c1121f}
+.output-box .legend .sw-blue{background:#3399ff}
+.output-box .legend .sw-normal{background:#e7edf5}
+.output-box .legend .sw-miss{background:#555}
+.demos{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
+.card{background:#0f1318;border:1px solid #1b2330;border-radius:8px;padding:1.2rem 1.5rem;width:280px;text-decoration:none;transition:all .2s}
+.card:hover{border-color:#2a3340;background:#131820;transform:translateY(-2px)}
+.card h2{font-size:1rem;font-weight:600;color:#e7edf5;margin-bottom:4px}
+.card p{font-size:.8rem;color:#8a95a3;line-height:1.4}
+.card .tag{display:inline-block;margin-top:6px;padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:600}
+.tag.demo{background:#1a2230;color:#a9b4c2;border:1px solid #2a3340}
+.tag.kinetic{background:#1a3a4a;color:#7ec8e3;border:1px solid #2a4a5a}
+.badges{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.5rem}
+.badge{font-size:.7rem;color:#555;border:1px solid #1b2330;padding:2px 7px;border-radius:4px}
+footer{font-size:.78rem;color:#555;text-align:center}
+footer a{color:#0066cc;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:600px){.showcase{flex-direction:column}.arrow-col{transform:rotate(90deg);padding:4px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero">
+<h1>🔬 ChronosLab</h1>
+<p class="subtitle">Turn scattered lab PDFs into one chronological timeline</p>
+</div>
+<div class="showcase">
+<div class="before">
+<div class="before-label">Before — the problem</div>
+<div class="before-body">
+<div class="messy-pdf"><span class="lang">FR</span> Lab report Jan 2020<br>Glucose: 0.92 <span class="unit">g/L</span><br>Hémoglobine: 14.7 <span class="unit">g/dL</span></div>
+<div class="messy-pdf"><span class="lang">DE</span> Labor-Bericht Sep 2026<br>Glucose: 90 <span class="unit">mg/dL</span><br>Hämoglobin: 15.6 <span class="unit">g/dL</span></div>
+<div class="messy-pdf"><span class="lang">EN</span> Lab Results Dec 2024<br>Glucose: 95 <span class="unit">mg/dL</span><br>Hemoglobin: 15.4 <span class="unit">g/dL</span></div>
+<div style="font-size:.7rem;color:#555;text-align:center;padding:4px">5 PDFs · 3 languages · 6 years of scattered data</div>
+</div>
+</div>
+<div class="arrow-col">→</div>
+<div class="after">
+<div class="after-label">After — ChronosLab</div>
+<div class="after-body">
+<div class="table-mini">
+<div class="row"><div class="name"></div><div class="date">2020-01</div><div class="date">2024-12</div><div class="date">2026-09</div></div>
+<div class="row"><div class="name">Glucose</div><div class="val normal">92</div><div class="val normal">95</div><div class="val normal">90</div></div>
+<div class="row"><div class="name">HbA1c</div><div class="val high">5.7</div><div class="val normal">5.2</div><div class="val normal">5.2</div></div>
+<div class="row"><div class="name">LDL</div><div class="val miss">—</div><div class="val high">146</div><div class="val high">121</div></div>
+<div class="row"><div class="name">CRP</div><div class="val normal">3</div><div class="val miss">—</div><div class="val normal">0.7</div></div>
+<div class="row"><div class="name">TSH</div><div class="val normal">1.18</div><div class="val normal">2.82</div><div class="val normal">2.36</div></div>
+</div>
+<div style="font-size:.7rem;color:#555;text-align:center;padding:4px">1 HTML file · unified units · flags where values exceed reference</div>
+</div>
+</div>
+</div>
+<div class="section-title">How it works — 5 steps</div>
+<div class="steps">
+<div class="step"><div class="num">1</div><div class="content"><h3>Ingest PDFs (or JSON)</h3><p>Feed it lab result PDFs from any lab, in French, English, or German. Tesseract OCR extracts text and bounding boxes at 300 DPI. No PDFs? Pre-extracted JSON works too.</p></div></div>
+<div class="step"><div class="num">2</div><div class="content"><h3>Verify patient identity</h3><p>Each document is checked for name, date of birth, and patient ID. If two PDFs belong to different patients — <strong>hard stop, no fallback</strong>. One patient per case, enforced.</p></div></div>
+<div class="step"><div class="num">3</div><div class="content"><h3>Normalize everything</h3><p>Analyte names like "Hämoglobin", "Hémoglobine", and "Hemoglobin" all map to one canonical name via a 304-entry multilingual dictionary. Units are converted (g/L → mg/dL). Reference ranges are parsed from the source.</p></div></div>
+<div class="step"><div class="num">4</div><div class="content"><h3>Assign panels &amp; compute flags</h3><p>Each analyte is placed in a clinical panel (blood count, renal, liver, lipids, etc.). Values are compared against reference ranges — <strong style="color:#c1121f">red if low</strong>, <strong style="color:#3399ff">blue if high</strong>. No reference range? No color. No guessing.</p></div></div>
+<div class="step"><div class="num">5</div><div class="content"><h3>Render the cockpit</h3><p>Everything is merged chronologically and rendered as a single self-contained HTML file. Parameters as rows, dates as columns, collapsible panels, evidence attributes for traceability. No JavaScript, no server, no external dependencies.</p></div></div>
+</div>
+<div class="output-box">
+<h3>What you see in the output</h3>
+<p>Each panel is a table. The left column shows the analyte name, unit, and reference range. Each column to the right is a blood draw date. If a value is outside the reference range, it's colored. If no data exists for that date, you see an em-dash (<code style="color:#7ec8e3">—</code>).</p>
+<p><strong>What you will NOT see:</strong> statistics, trend arrows, risk scores, clinical interpretation, "improving" or "worsening" labels, patient names in the body. The philosophy: <em>show the clinician the data, let the clinician decide.</em></p>
+<div class="legend">
+<span><span class="swatch sw-red"></span> Low (below reference)</span>
+<span><span class="swatch sw-blue"></span> High (above reference)</span>
+<span><span class="swatch sw-normal"></span> Normal (within range)</span>
+<span><span class="swatch sw-miss"></span> No data (em-dash)</span>
+</div>
+</div>
+<div class="section-title">Try the live demos</div>
+<div class="demos">
+<a class="card" href="demo.html"><h2>Quick Demo</h2><p>Synthetic lab data. 3 panels, 8 analytes, 2 dates. Fast preview.</p><span class="tag demo">View →</span></a>
+<a class="card" href="kinetics.html"><h2>Full Timeline</h2><p>Real case: 5 blood draws, 6 years, 3 languages, 55 analytes, 24 flags. Includes supplementary annotations (HOMA-IR, risk ratios, clinical context).</p><span class="tag kinetic">View →</span></a>
+</div>
+<div class="badges">
+<span class="badge">Python 3.10+</span>
+<span class="badge">FR · EN · DE</span>
+<span class="badge">304 analytes</span>
+<span class="badge">MIT License</span>
+</div>
+<footer><a href="https://github.com/HyyperNab/ChronosLab">github.com/HyyperNab/ChronosLab</a> · v1.6.0</footer>
+</div>
+</body>
+</html>
