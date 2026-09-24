@@ -1,0 +1,304 @@
+# Analyte Normalization Dictionary
+# FR/EN/DE → Canonical Names
+# Comprehensive coverage of common lab parameters
+
+# HEMATOLOGY
+"Hémoglobine": "Hemoglobin"
+"Hemoglobin": "Hemoglobin"
+"Hämoglobin": "Hemoglobin"
+"Hb": "Hemoglobin"
+
+"Hématocrite": "Hematocrit"
+"Hematocrit": "Hematocrit"
+"Hämatokrit": "Hematocrit"
+"Hct": "Hematocrit"
+
+"Globules rouges": "RBC"
+"Red blood cells": "RBC"
+"Erythrozyten": "RBC"
+"RBC": "RBC"
+"GR": "RBC"
+
+"Globules blancs": "WBC"
+"Leucocytes": "WBC"
+"White blood cells": "WBC"
+"Leukozyten": "WBC"
+"WBC": "WBC"
+"GB": "WBC"
+
+"Plaquettes": "Platelets"
+"Platelets": "Platelets"
+"Thrombozyten": "Platelets"
+"PLT": "Platelets"
+
+"VGM": "MCV"
+"Mean corpuscular volume": "MCV"
+"MCV": "MCV"
+
+"TGMH": "MCH"
+"Mean corpuscular hemoglobin": "MCH"
+"MCH": "MCH"
+
+"CGMH": "MCHC"
+"Mean corpuscular hemoglobin concentration": "MCHC"
+"MCHC": "MCHC"
+
+"Neutrophiles": "Neutrophils"
+"Polynucléaires neutrophiles": "Neutrophils"
+"Neutrophils": "Neutrophils"
+"PNN": "Neutrophils"
+
+"Lymphocytes": "Lymphocytes"
+"Lymphozyten": "Lymphocytes"
+
+"Monocytes": "Monocytes"
+"Monozyten": "Monocytes"
+
+"Éosinophiles": "Eosinophils"
+"Eosinophils": "Eosinophils"
+
+"Basophiles": "Basophils"
+"Basophils": "Basophils"
+
+# INFLAMMATION
+"CRP": "CRP"
+"C-reactive protein": "CRP"
+"Protéine C réactive": "CRP"
+"C-reaktives Protein": "CRP"
+
+"VS": "ESR"
+"Vitesse de sédimentation": "ESR"
+"Erythrocyte sedimentation rate": "ESR"
+"ESR": "ESR"
+
+# COAGULATION
+"TP": "PT"
+"Taux de prothrombine": "PT"
+"Prothrombin time": "PT"
+"PT": "PT"
+"Quick": "PT"
+
+"INR": "INR"
+
+"TCA": "APTT"
+"Temps de céphaline activée": "APTT"
+"APTT": "APTT"
+"PTT": "APTT"
+
+# RENAL FUNCTION
+"Créatinine": "Creatinine"
+"Creatinine": "Creatinine"
+"Kreatinin": "Creatinine"
+
+"Urée": "Urea"
+"Urea": "Urea"
+"Harnstoff": "Urea"
+"BUN": "Urea"
+
+"Acide urique": "Uric Acid"
+"Uric acid": "Uric Acid"
+"Harnsäure": "Uric Acid"
+
+"DFG": "eGFR"
+"Débit de filtration glomérulaire": "eGFR"
+"eGFR": "eGFR"
+"GFR": "eGFR"
+
+"Sodium": "Sodium"
+"Natrium": "Sodium"
+"Na": "Sodium"
+
+"Potassium": "Potassium"
+"Kalium": "Potassium"
+"K": "Potassium"
+
+"Chlore": "Chloride"
+"Chloride": "Chloride"
+"Chlorid": "Chloride"
+"Cl": "Chloride"
+
+"Bicarbonates": "Bicarbonate"
+"Bicarbonate": "Bicarbonate"
+"CO2": "Bicarbonate"
+"HCO3": "Bicarbonate"
+
+"Calcium": "Calcium"
+"Kalzium": "Calcium"
+"Ca": "Calcium"
+
+"Magnésium": "Magnesium"
+"Magnesium": "Magnesium"
+"Mg": "Magnesium"
+
+"Phosphore": "Phosphorus"
+"Phosphorus": "Phosphorus"
+"Phosphat": "Phosphorus"
+"P": "Phosphorus"
+
+# HEPATIC FUNCTION
+"ASAT": "AST"
+"AST": "AST"
+"SGOT": "AST"
+"Aspartate aminotransférase": "AST"
+"Aspartate aminotransferase": "AST"
+
+"ALAT": "ALT"
+"ALT": "ALT"
+"SGPT": "ALT"
+"Alanine aminotransférase": "ALT"
+"Alanine aminotransferase": "ALT"
+
+"GGT": "GGT"
+"Gamma-GT": "GGT"
+"Gamma glutamyl transpeptidase": "GGT"
+
+"PAL": "ALP"
+"Phosphatase alcaline": "ALP"
+"Alkaline phosphatase": "ALP"
+"ALP": "ALP"
+"AP": "ALP"
+
+"Bilirubine totale": "Bilirubin Total"
+"Total bilirubin": "Bilirubin Total"
+"Gesamtbilirubin": "Bilirubin Total"
+
+"Bilirubine conjuguée": "Bilirubin Direct"
+"Bilirubine directe": "Bilirubin Direct"
+"Direct bilirubin": "Bilirubin Direct"
+
+"Albumine": "Albumin"
+"Albumin": "Albumin"
+
+"Protéines totales": "Total Protein"
+"Total protein": "Total Protein"
+"Gesamteiweiß": "Total Protein"
+
+# LIPIDS
+"Cholestérol total": "Total Cholesterol"
+"Total cholesterol": "Total Cholesterol"
+"Gesamtcholesterin": "Total Cholesterol"
+"Cholesterol": "Total Cholesterol"
+
+"LDL": "LDL Cholesterol"
+"LDL-Cholestérol": "LDL Cholesterol"
+"LDL cholesterol": "LDL Cholesterol"
+"LDL-Cholesterin": "LDL Cholesterol"
+
+"HDL": "HDL Cholesterol"
+"HDL-Cholestérol": "HDL Cholesterol"
+"HDL cholesterol": "HDL Cholesterol"
+"HDL-Cholesterin": "HDL Cholesterol"
+
+"Triglycérides": "Triglycerides"
+"Triglycerides": "Triglycerides"
+"Triglyzeride": "Triglycerides"
+
+# GLUCOSE METABOLISM
+"Glucose": "Glucose"
+"Glycémie": "Glucose"
+"Blood glucose": "Glucose"
+"Blutzucker": "Glucose"
+
+"Hémoglobine glyquée": "HbA1c"
+"Hemoglobine glyquee": "HbA1c"
+"Hémoglobine glycosylée": "HbA1c"
+"Glycated hemoglobin": "HbA1c"
+"Hemoglobin A1c": "HbA1c"
+"Glykiertes Hämoglobin": "HbA1c"
+"HbA1c": "HbA1c"
+"A1c": "HbA1c"
+
+# PANCREATIC ENZYMES
+"Amylase": "Amylase"
+"Amylase pancréatique": "Amylase"
+
+"Lipase": "Lipase"
+"Lipase pancréatique": "Lipase"
+
+# THYROID
+"TSH": "TSH"
+"Thyréostimuline": "TSH"
+"Thyroid stimulating hormone": "TSH"
+"Thyreotropin": "TSH"
+
+"T3": "T3"
+"Triiodothyronine": "T3"
+"T3 libre": "Free T3"
+"Free T3": "Free T3"
+"FT3": "Free T3"
+
+"T4": "T4"
+"Thyroxine": "T4"
+"T4 libre": "Free T4"
+"Free T4": "Free T4"
+"FT4": "Free T4"
+
+# IRON STUDIES
+"Fer": "Iron"
+"Iron": "Iron"
+"Eisen": "Iron"
+"Fe": "Iron"
+
+"Ferritine": "Ferritin"
+"Ferritin": "Ferritin"
+
+"Transferrine": "Transferrin"
+"Transferrin": "Transferrin"
+
+"CTF": "TIBC"
+"Capacité totale de fixation": "TIBC"
+"Total iron binding capacity": "TIBC"
+"TIBC": "TIBC"
+
+# VITAMINS
+"Vitamine B12": "Vitamin B12"
+"Vitamin B12": "Vitamin B12"
+"B12": "Vitamin B12"
+"Cobalamine": "Vitamin B12"
+
+"Vitamine D": "Vitamin D"
+"Vitamin D": "Vitamin D"
+"25-OH Vitamine D": "Vitamin D"
+"25-OH Vitamin D": "Vitamin D"
+
+"Folates": "Folate"
+"Acide folique": "Folate"
+"Folic acid": "Folate"
+"Folsäure": "Folate"
+
+# CARDIAC MARKERS
+"Troponine": "Troponin"
+"Troponin": "Troponin"
+
+"BNP": "BNP"
+"Brain natriuretic peptide": "BNP"
+"NT-proBNP": "NT-proBNP"
+
+# TUMOR MARKERS
+"PSA": "PSA"
+"Antigène prostatique spécifique": "PSA"
+"Prostate specific antigen": "PSA"
+
+"CEA": "CEA"
+"Antigène carcino-embryonnaire": "CEA"
+"Carcinoembryonic antigen": "CEA"
+
+"CA 19-9": "CA 19-9"
+"CA 125": "CA 125"
+
+"AFP": "AFP"
+"Alpha-foetoprotéine": "AFP"
+"Alpha-fetoprotein": "AFP"
+
+# IMMUNOLOGY
+"IgG": "IgG"
+"IgA": "IgA"
+"IgM": "IgM"
+"IgE": "IgE"
+
+# URINE
+"Microalbuminurie": "Microalbuminuria"
+"Microalbuminuria": "Microalbuminuria"
+
+"Rapport protéine/créatinine": "Protein/Creatinine Ratio"
+"Protein creatinine ratio": "Protein/Creatinine Ratio"

@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Patient data — Datenschutz (NEVER commit real patient data)
+data/input/case_knl*
+data/output/
+
+# Keep directory structure
+!data/output/.gitkeep
+
+# Temp files
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp

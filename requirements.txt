@@ -1,0 +1,10 @@
+# ChronosLab Requirements
+# Core dependencies (minimal by design)
+
+pyyaml>=6.0
+
+# OCR dependencies (optional, for PDF ingestion)
+pytesseract>=0.3.10
+pdf2image>=1.16.0
+Pillow>=10.0.0
+pdfplumber>=0.10.0

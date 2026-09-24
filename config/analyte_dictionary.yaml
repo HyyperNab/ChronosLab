@@ -1,0 +1,411 @@
+# ChronosLab Analyte Dictionary
+# Maps lab analyte names (multilingual) to canonical form with panel assignment
+
+analytes:
+  # NFS (Hémogramme)
+  - canonical: "Hemoglobin"
+    panel: "NFS"
+    order: 1
+    synonyms:
+      fr: ["Hémoglobine", "Hb", "HGB"]
+      de: ["Hämoglobin", "Hb", "HGB"]
+      en: ["Hemoglobin", "Hb", "HGB"]
+      nl: ["Hemoglobine", "Hb"]
+      es: ["Hemoglobina", "Hb"]
+    
+  - canonical: "Hematocrit"
+    panel: "NFS"
+    order: 2
+    synonyms:
+      fr: ["Hématocrite", "Ht", "HCT"]
+      de: ["Hämatokrit", "Hkt", "HCT"]
+      en: ["Hematocrit", "Hct", "HCT"]
+      nl: ["Hematocriet", "Ht"]
+      es: ["Hematocrito", "Hto"]
+    
+  - canonical: "MCH"
+    panel: "NFS"
+    order: 3
+    synonyms:
+      fr: ["TCMH", "MCH"]
+      de: ["MCH", "HbE"]
+      en: ["MCH", "Mean Corpuscular Hemoglobin"]
+      nl: ["MCH"]
+      es: ["HCM"]
+    
+  - canonical: "MCHC"
+    panel: "NFS"
+    order: 4
+    synonyms:
+      fr: ["CCMH", "MCHC"]
+      de: ["MCHC"]
+      en: ["MCHC", "Mean Corpuscular Hemoglobin Concentration"]
+      nl: ["MCHC"]
+      es: ["CHCM"]
+    
+  - canonical: "MCV"
+    panel: "NFS"
+    order: 5
+    synonyms:
+      fr: ["VGM", "MCV"]
+      de: ["MCV", "Mittleres Erythrozytenvolumen"]
+      en: ["MCV", "Mean Corpuscular Volume"]
+      nl: ["MCV"]
+      es: ["VCM"]
+    
+  - canonical: "WBC"
+    panel: "NFS"
+    order: 6
+    synonyms:
+      fr: ["Leucocytes", "GB", "WBC"]
+      de: ["Leukozyten", "WBC"]
+      en: ["White Blood Cells", "WBC", "Leukocytes"]
+      nl: ["Leukocyten", "WBC"]
+      es: ["Leucocitos", "WBC"]
+    
+  - canonical: "Neutrophils"
+    panel: "NFS"
+    order: 7
+    synonyms:
+      fr: ["Neutrophiles", "Polynucléaires neutrophiles", "PNN"]
+      de: ["Neutrophile", "Neutrophile Granulozyten"]
+      en: ["Neutrophils", "Neutrophil Granulocytes"]
+      nl: ["Neutrofielen"]
+      es: ["Neutrófilos"]
+    
+  - canonical: "Lymphocytes"
+    panel: "NFS"
+    order: 8
+    synonyms:
+      fr: ["Lymphocytes"]
+      de: ["Lymphozyten"]
+      en: ["Lymphocytes"]
+      nl: ["Lymfocyten"]
+      es: ["Linfocitos"]
+    
+  - canonical: "Monocytes"
+    panel: "NFS"
+    order: 9
+    synonyms:
+      fr: ["Monocytes"]
+      de: ["Monozyten"]
+      en: ["Monocytes"]
+      nl: ["Monocyten"]
+      es: ["Monocitos"]
+    
+  - canonical: "Eosinophils"
+    panel: "NFS"
+    order: 10
+    synonyms:
+      fr: ["Éosinophiles", "Eosinophiles"]
+      de: ["Eosinophile"]
+      en: ["Eosinophils"]
+      nl: ["Eosinofielen"]
+      es: ["Eosinófilos"]
+    
+  - canonical: "Basophils"
+    panel: "NFS"
+    order: 11
+    synonyms:
+      fr: ["Basophiles"]
+      de: ["Basophile"]
+      en: ["Basophils"]
+      nl: ["Basofielen"]
+      es: ["Basófilos"]
+    
+  - canonical: "Platelets"
+    panel: "NFS"
+    order: 12
+    synonyms:
+      fr: ["Plaquettes", "PLT", "Thrombocytes"]
+      de: ["Thrombozyten", "PLT"]
+      en: ["Platelets", "PLT", "Thrombocytes"]
+      nl: ["Bloedplaatjes", "Trombocyten"]
+      es: ["Plaquetas"]
+
+  # RENAL (Bilan Rénal)
+  - canonical: "Sodium"
+    panel: "RENAL"
+    order: 1
+    synonyms:
+      fr: ["Sodium", "Na"]
+      de: ["Natrium", "Na"]
+      en: ["Sodium", "Na"]
+      nl: ["Natrium", "Na"]
+      es: ["Sodio", "Na"]
+    
+  - canonical: "Potassium"
+    panel: "RENAL"
+    order: 2
+    synonyms:
+      fr: ["Potassium", "K"]
+      de: ["Kalium", "K"]
+      en: ["Potassium", "K"]
+      nl: ["Kalium", "K"]
+      es: ["Potasio", "K"]
+    
+  - canonical: "Chloride"
+    panel: "RENAL"
+    order: 3
+    synonyms:
+      fr: ["Chlore", "Cl"]
+      de: ["Chlorid", "Cl"]
+      en: ["Chloride", "Cl"]
+      nl: ["Chloride", "Cl"]
+      es: ["Cloruro", "Cl"]
+    
+  - canonical: "Bicarbonate"
+    panel: "RENAL"
+    order: 4
+    synonyms:
+      fr: ["Bicarbonate", "HCO3"]
+      de: ["Bikarbonat", "HCO3"]
+      en: ["Bicarbonate", "HCO3"]
+      nl: ["Bicarbonaat", "HCO3"]
+      es: ["Bicarbonato", "HCO3"]
+    
+  - canonical: "Calcium"
+    panel: "RENAL"
+    order: 5
+    synonyms:
+      fr: ["Calcium", "Ca"]
+      de: ["Kalzium", "Calcium", "Ca"]
+      en: ["Calcium", "Ca"]
+      nl: ["Calcium", "Ca"]
+      es: ["Calcio", "Ca"]
+    
+  - canonical: "Magnesium"
+    panel: "RENAL"
+    order: 6
+    synonyms:
+      fr: ["Magnésium", "Mg"]
+      de: ["Magnesium", "Mg"]
+      en: ["Magnesium", "Mg"]
+      nl: ["Magnesium", "Mg"]
+      es: ["Magnesio", "Mg"]
+    
+  - canonical: "Phosphorus"
+    panel: "RENAL"
+    order: 7
+    synonyms:
+      fr: ["Phosphore", "P"]
+      de: ["Phosphor", "P"]
+      en: ["Phosphorus", "Phosphate", "P"]
+      nl: ["Fosfor", "P"]
+      es: ["Fósforo", "P"]
+    
+  - canonical: "Creatinine"
+    panel: "RENAL"
+    order: 8
+    synonyms:
+      fr: ["Créatinine", "Creat"]
+      de: ["Kreatinin", "Krea"]
+      en: ["Creatinine", "Creat"]
+      nl: ["Creatinine"]
+      es: ["Creatinina"]
+    
+  - canonical: "Urea"
+    panel: "RENAL"
+    order: 9
+    synonyms:
+      fr: ["Urée"]
+      de: ["Harnstoff"]
+      en: ["Urea", "BUN"]
+      nl: ["Ureum"]
+      es: ["Urea"]
+
+  # HEPATIC (Bilan Hépatique)
+  - canonical: "ALT"
+    panel: "HEPATIC"
+    order: 1
+    synonyms:
+      fr: ["ALAT", "ALT", "TGP"]
+      de: ["ALT", "GPT", "ALAT"]
+      en: ["ALT", "SGPT", "Alanine Aminotransferase"]
+      nl: ["ALAT", "ALT"]
+      es: ["ALT", "GPT"]
+    
+  - canonical: "AST"
+    panel: "HEPATIC"
+    order: 2
+    synonyms:
+      fr: ["ASAT", "AST", "TGO"]
+      de: ["AST", "GOT", "ASAT"]
+      en: ["AST", "SGOT", "Aspartate Aminotransferase"]
+      nl: ["ASAT", "AST"]
+      es: ["AST", "GOT"]
+    
+  - canonical: "GGT"
+    panel: "HEPATIC"
+    order: 3
+    synonyms:
+      fr: ["Gamma GT", "GGT"]
+      de: ["Gamma-GT", "GGT"]
+      en: ["GGT", "Gamma-Glutamyl Transferase"]
+      nl: ["Gamma-GT"]
+      es: ["GGT"]
+    
+  - canonical: "ALP"
+    panel: "HEPATIC"
+    order: 4
+    synonyms:
+      fr: ["Phosphatase alcaline", "PAL", "ALP"]
+      de: ["Alkalische Phosphatase", "AP", "ALP"]
+      en: ["Alkaline Phosphatase", "ALP"]
+      nl: ["Alkalische fosfatase", "AF"]
+      es: ["Fosfatasa alcalina", "FA"]
+    
+  - canonical: "Bilirubin Total"
+    panel: "HEPATIC"
+    order: 5
+    synonyms:
+      fr: ["Bilirubine totale"]
+      de: ["Bilirubin gesamt"]
+      en: ["Total Bilirubin", "Bilirubin Total"]
+      nl: ["Totaal bilirubine"]
+      es: ["Bilirrubina total"]
+    
+  - canonical: "Albumin"
+    panel: "HEPATIC"
+    order: 6
+    synonyms:
+      fr: ["Albumine"]
+      de: ["Albumin"]
+      en: ["Albumin"]
+      nl: ["Albumine"]
+      es: ["Albúmina"]
+
+  # CRP
+  - canonical: "CRP"
+    panel: "CRP"
+    order: 1
+    synonyms:
+      fr: ["CRP", "Protéine C réactive"]
+      de: ["CRP", "C-reaktives Protein"]
+      en: ["CRP", "C-Reactive Protein"]
+      nl: ["CRP"]
+      es: ["PCR", "Proteína C reactiva"]
+
+  # GLUCOSE / A1C
+  - canonical: "Glucose"
+    panel: "GLUCOSE_A1C"
+    order: 1
+    synonyms:
+      fr: ["Glucose", "Glycémie"]
+      de: ["Glukose", "Blutzucker"]
+      en: ["Glucose", "Blood Sugar"]
+      nl: ["Glucose"]
+      es: ["Glucosa"]
+    
+  - canonical: "HbA1c"
+    panel: "GLUCOSE_A1C"
+    order: 2
+    synonyms:
+      fr: ["HbA1c", "Hémoglobine glyquée"]
+      de: ["HbA1c", "Glykohämoglobin"]
+      en: ["HbA1c", "Glycated Hemoglobin", "A1c"]
+      nl: ["HbA1c"]
+      es: ["HbA1c", "Hemoglobina glucosilada"]
+
+  # LIPIDS
+  - canonical: "Cholesterol Total"
+    panel: "LIPIDS"
+    order: 1
+    synonyms:
+      fr: ["Cholestérol total"]
+      de: ["Gesamtcholesterin"]
+      en: ["Total Cholesterol", "Cholesterol"]
+      nl: ["Totaal cholesterol"]
+      es: ["Colesterol total"]
+    
+  - canonical: "HDL"
+    panel: "LIPIDS"
+    order: 2
+    synonyms:
+      fr: ["HDL-Cholestérol", "HDL"]
+      de: ["HDL-Cholesterin", "HDL"]
+      en: ["HDL Cholesterol", "HDL"]
+      nl: ["HDL-cholesterol"]
+      es: ["HDL-colesterol", "HDL"]
+    
+  - canonical: "LDL"
+    panel: "LIPIDS"
+    order: 3
+    synonyms:
+      fr: ["LDL-Cholestérol", "LDL"]
+      de: ["LDL-Cholesterin", "LDL"]
+      en: ["LDL Cholesterol", "LDL"]
+      nl: ["LDL-cholesterol"]
+      es: ["LDL-colesterol", "LDL"]
+    
+  - canonical: "Triglycerides"
+    panel: "LIPIDS"
+    order: 4
+    synonyms:
+      fr: ["Triglycérides"]
+      de: ["Triglyzeride"]
+      en: ["Triglycerides"]
+      nl: ["Triglyceriden"]
+      es: ["Triglicéridos"]
+
+  # THYROID
+  - canonical: "TSH"
+    panel: "THYROID"
+    order: 1
+    synonyms:
+      fr: ["TSH"]
+      de: ["TSH"]
+      en: ["TSH", "Thyroid Stimulating Hormone"]
+      nl: ["TSH"]
+      es: ["TSH"]
+    
+  - canonical: "T3"
+    panel: "THYROID"
+    order: 2
+    synonyms:
+      fr: ["T3", "Triiodothyronine"]
+      de: ["T3", "Trijodthyronin"]
+      en: ["T3", "Triiodothyronine"]
+      nl: ["T3"]
+      es: ["T3"]
+    
+  - canonical: "T4"
+    panel: "THYROID"
+    order: 3
+    synonyms:
+      fr: ["T4", "Thyroxine"]
+      de: ["T4", "Thyroxin"]
+      en: ["T4", "Thyroxine"]
+      nl: ["T4"]
+      es: ["T4"]
+
+  # COAGULATION
+  - canonical: "PT"
+    panel: "COAG"
+    order: 1
+    synonyms:
+      fr: ["TP", "Taux de prothrombine"]
+      de: ["Quick-Wert", "PT"]
+      en: ["PT", "Prothrombin Time"]
+      nl: ["PT", "Protrombinetijd"]
+      es: ["TP", "Tiempo de protrombina"]
+    
+  - canonical: "INR"
+    panel: "COAG"
+    order: 2
+    synonyms:
+      fr: ["INR"]
+      de: ["INR"]
+      en: ["INR", "International Normalized Ratio"]
+      nl: ["INR"]
+      es: ["INR"]
+    
+  - canonical: "aPTT"
+    panel: "COAG"
+    order: 3
+    synonyms:
+      fr: ["TCA", "Temps de céphaline activée"]
+      de: ["aPTT", "PTT"]
+      en: ["aPTT", "Activated Partial Thromboplastin Time"]
+      nl: ["aPTT"]
+      es: ["TTPa"]

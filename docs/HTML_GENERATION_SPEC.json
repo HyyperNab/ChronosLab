@@ -1,0 +1,416 @@
+{
+  "name": "ChronosLab HTML Generation Specification",
+  "version": "1.5.0",
+  "status": "HARD_LOCK",
+  "lock_date": "2025-01-10",
+  "purpose": "Anti-drift specification for HTML cockpit generation",
+  
+  "critical_rules": {
+    "rule_1_truth_over_completeness": {
+      "principle": "Missing data stays missing",
+      "enforcement": [
+        "NEVER infer missing values",
+        "NEVER guess units",
+        "NEVER fill gaps with estimates",
+        "Empty cells must be truly empty (<td></td>)"
+      ],
+      "violations": [
+        "Filling empty cells with 'N/A'",
+        "Assuming units from context",
+        "Interpolating missing timepoints",
+        "Adding default values"
+      ]
+    },
+    
+    "rule_2_silence_over_speculation": {
+      "principle": "No interpretation, no commentary",
+      "enforcement": [
+        "NO 'normal' / 'abnormal' labels",
+        "NO trend arrows (↑/↓)",
+        "NO status badges",
+        "NO clinical interpretation",
+        "ONLY show: value, reference range, high/low flag"
+      ],
+      "allowed": [
+        "High/Low coloring (red/blue) based on reference",
+        "Flag indicators (H, L, HH, LL) from source data"
+      ],
+      "violations": [
+        "Adding 'improving' or 'worsening' labels",
+        "Trend indicators not from source",
+        "Risk assessments",
+        "Clinical recommendations"
+      ]
+    },
+    
+    "rule_3_determinism_over_cleverness": {
+      "principle": "Same input → same output, always",
+      "enforcement": [
+        "NO randomization",
+        "NO timestamp-dependent behavior",
+        "NO 'smart' reordering based on values",
+        "Constitutional panel order is FROZEN"
+      ],
+      "panel_order_frozen": [
+        "NFS",
+        "VS_H1",
+        "VS_H2",
+        "CRP",
+        "COAG",
+        "RENAL",
+        "HEPATIC",
+        "AMYLASE_LIPASE",
+        "LIPIDS",
+        "GLUCOSE_A1C",
+        "NUTRITION",
+        "THYROID",
+        "TUMOR_MARKERS",
+        "MISC"
+      ],
+      "violations": [
+        "Sorting panels by row count",
+        "Hiding 'empty' panels",
+        "Reordering based on 'importance'",
+        "Time-of-day dependent rendering"
+      ]
+    },
+    
+    "rule_4_clinician_first_readability": {
+      "principle": "Clinical workflow dictates layout",
+      "enforcement": [
+        "Parameters = ROWS (vertical)",
+        "Dates = COLUMNS (horizontal)",
+        "Chronological left-to-right",
+        "Panel collapsible but defaults OPEN",
+        "Reference ranges visible for each parameter"
+      ],
+      "structure_locked": {
+        "table_orientation": "parameters_vertical_dates_horizontal",
+        "date_order": "chronological_left_to_right",
+        "panel_state": "open_by_default",
+        "reference_display": "below_parameter_name"
+      },
+      "violations": [
+        "Dates as rows, parameters as columns",
+        "Reverse chronological",
+        "Panels closed by default",
+        "Reference ranges hidden in tooltips"
+      ]
+    },
+    
+    "rule_5_datenschutz_by_design": {
+      "principle": "Privacy is non-negotiable",
+      "enforcement": [
+        "NO patient names in HTML export",
+        "NO DOB in HTML export",
+        "Case ID only (anonymized)",
+        "Evidence attributes (data-page, data-doc) allowed",
+        "All PII stripped before export"
+      ],
+      "allowed_identifiers": [
+        "Case ID (anonymized)",
+        "Document ID (generic)",
+        "Page numbers",
+        "Bounding box coordinates"
+      ],
+      "violations": [
+        "Patient name anywhere in HTML",
+        "Date of birth in HTML",
+        "Social security numbers",
+        "Address information",
+        "Any personally identifying info"
+      ]
+    }
+  },
+  
+  "html_structure_specification": {
+    "document_type": "HTML5",
+    "character_encoding": "UTF-8",
+    "required_sections": [
+      "DOCTYPE declaration",
+      "CSS styles (embedded)",
+      "Body with panels",
+      "NO JavaScript required"
+    ],
+    
+    "panel_structure": {
+      "element": "<details class='panel'>",
+      "default_state": "open",
+      "children": [
+        "<summary> with panel name",
+        "<div class='panelBody'>",
+        "<table> with data"
+      ],
+      "table_structure": {
+        "thead": {
+          "row_1": "Parameter names (th.var) + Date headers (th)"
+        },
+        "tbody": {
+          "each_row": [
+            "th.var: Parameter name + unit + reference",
+            "td cells: Values for each date"
+          ]
+        }
+      }
+    },
+    
+    "css_classes_locked": {
+      "panel": "Panel container (details element)",
+      "panelBody": "Panel content wrapper",
+      "var": "Parameter name cell (th)",
+      "val": "Value cell content (span)",
+      "high": "Above reference (red)",
+      "low": "Below reference (blue)",
+      "vhigh": "Critically high (bold red)",
+      "vlow": "Critically low (bold blue)",
+      "unit": "Unit display (span)",
+      "refline": "Reference range display (span)"
+    },
+    
+    "color_scheme_locked": {
+      "high": "#d32f2f (red)",
+      "low": "#1976d2 (blue)",
+      "vhigh": "#b71c1c (dark red, bold)",
+      "vlow": "#0d47a1 (dark blue, bold)",
+      "normal": "#000000 (black)"
+    },
+    
+    "forbidden_elements": [
+      "JavaScript code",
+      "External CSS links (must be embedded)",
+      "External font links",
+      "Analytics tracking",
+      "Social media buttons",
+      "Advertisement spaces",
+      "Modal dialogs",
+      "Pop-up alerts"
+    ]
+  },
+  
+  "data_attributes_specification": {
+    "purpose": "Evidence tracing for medico-legal defensibility",
+    "required_on_cells": [
+      "data-page: Source page number",
+      "data-doc: Source document ID"
+    ],
+    "optional_on_cells": [
+      "data-bbox: Bounding box coordinates (x,y,w,h)",
+      "data-confidence: OCR confidence score (0.0-1.0)"
+    ],
+    "usage": "Inspectable in browser dev tools, not visible in UI",
+    "example": "<td data-page=\"1\" data-doc=\"DOC-001\" data-bbox=\"120,340,80,20\" data-confidence=\"0.95\"><span class='val'>13.2</span></td>"
+  },
+  
+  "value_rendering_rules": {
+    "numeric_values": {
+      "format": "Decimal with 1-2 significant decimals",
+      "examples": [
+        "13.2 (not 13.20)",
+        "0.9 (not 0.90)",
+        "145 (integer if whole number)"
+      ],
+      "rounding": "Round to reasonable precision based on magnitude"
+    },
+    
+    "qualitative_values": {
+      "display": "Exactly as received",
+      "examples": [
+        "NEG",
+        "POS",
+        "POSITIVE",
+        "NEGATIF"
+      ],
+      "no_normalization": "Show original text"
+    },
+    
+    "missing_values": {
+      "representation": "Empty cell",
+      "html": "<td></td>",
+      "forbidden": [
+        "N/A",
+        "–",
+        "...",
+        "Missing"
+      ]
+    },
+    
+    "inequality_values": {
+      "display": "Show inequality symbol",
+      "examples": [
+        "< 5",
+        "> 100"
+      ],
+      "coloring": "Apply high/low color to inequality values"
+    }
+  },
+  
+  "reference_range_rendering": {
+    "location": "Below parameter name in header cell",
+    "format": "<span class='refline'>ref: {low}–{high}</span>",
+    "examples": [
+      "ref: 12–16",
+      "ref: < 5",
+      "ref: > 10"
+    ],
+    "missing_reference": "Do not display refline span",
+    "confidence_handling": {
+      "HIGH": "Display normally",
+      "LOW": "Display normally (no visual distinction in HTML)"
+    }
+  },
+  
+  "state_changes_section": {
+    "purpose": "Show qualitative result transitions",
+    "display": "Separate panel after main panels",
+    "title": "State Changes (Qualitative)",
+    "format": "Table with columns: Parameter, From, To, Date",
+    "example_row": "HBsAg | NEG | POS | 2024-03-15",
+    "rules": [
+      "Only show if state actually changed",
+      "No interpretation (just facts)",
+      "Chronological by change date"
+    ]
+  },
+  
+  "anti_patterns_forbidden": {
+    "statistics": [
+      "NO mean/median/std dev",
+      "NO trend lines",
+      "NO correlations",
+      "NO predictive models"
+    ],
+    
+    "visualizations": [
+      "NO charts/graphs",
+      "NO sparklines",
+      "NO heatmaps",
+      "NO progress bars"
+    ],
+    
+    "ui_theater": [
+      "NO loading spinners",
+      "NO success badges",
+      "NO philosophy quotes",
+      "NO 'powered by' footers",
+      "NO version numbers in UI"
+    ],
+    
+    "comparison_features": [
+      "NO patient-to-patient comparison",
+      "NO population percentiles",
+      "NO 'normal for age' adjustments"
+    ]
+  },
+  
+  "constitutional_locks": {
+    "panel_order": {
+      "status": "FROZEN",
+      "modification": "Requires version bump + rationale + revalidation"
+    },
+    
+    "renal_membership": {
+      "locked_analytes": [
+        "Sodium",
+        "Potassium",
+        "Chloride",
+        "Bicarbonate",
+        "Calcium",
+        "Magnesium",
+        "Phosphorus"
+      ],
+      "status": "IMMUTABLE",
+      "reason": "Clinical workflow standard"
+    },
+    
+    "nfs_suborder": {
+      "locked_sequence": [
+        "Hemoglobin",
+        "Hematocrit",
+        "MCH",
+        "MCHC",
+        "MCV",
+        "WBC",
+        "Neutrophils",
+        "Lymphocytes",
+        "Monocytes",
+        "Eosinophils",
+        "Basophils",
+        "Platelets"
+      ],
+      "status": "FROZEN",
+      "reason": "Standard hematology reporting order"
+    }
+  },
+  
+  "file_output_requirements": {
+    "filename": "{case_id}_clinician_cockpit_table_ft.html",
+    "encoding": "UTF-8",
+    "line_endings": "Unix (LF)",
+    "write_operation": "Atomic (write to temp, then move)",
+    "verification": "Check file size > 1000 bytes after write",
+    "location": "data/output/{case_id}/"
+  },
+  
+  "completeness_guarantee": {
+    "all_rows_rendered": "Every canonical row must appear in HTML",
+    "all_dates_rendered": "Every unique date must have a column",
+    "all_panels_rendered": "Every panel with data must appear",
+    "verification": "Row count in HTML === row count in case_bundle.json",
+    "failure_mode": "If incomplete, regenerate or split into parts"
+  },
+  
+  "print_safety": {
+    "requirement": "HTML must be print-safe",
+    "enforcement": [
+      "All panels expanded for print",
+      "@media print CSS rules",
+      "Page breaks avoided within tables",
+      "Collapsible state ignored in print"
+    ]
+  },
+  
+  "version_control": {
+    "specification_version": "1.5.0",
+    "renderer_compatibility": "renderer.py v1.4.4+",
+    "constitution_version": "1.4.3+",
+    "changes_require": [
+      "Version bump",
+      "Written rationale",
+      "Full regression testing",
+      "Hash recomputation"
+    ]
+  },
+  
+  "enforcement_checklist": {
+    "before_rendering": [
+      "Validate all input rows",
+      "Check constitutional compliance",
+      "Verify panel membership",
+      "Confirm no PII in export"
+    ],
+    
+    "during_rendering": [
+      "Follow panel order exactly",
+      "Apply color rules correctly",
+      "Embed evidence attributes",
+      "Maintain chronological order"
+    ],
+    
+    "after_rendering": [
+      "Lint for completeness",
+      "Verify row count matches input",
+      "Check file size > threshold",
+      "Validate HTML structure"
+    ]
+  },
+  
+  "examples": {
+    "valid_cell": "<td data-page=\"1\" data-doc=\"DOC-001\"><span class='val high'>16.8</span></td>",
+    "valid_header": "<th class='var'>Hemoglobin <span class='unit'>(g/dL)</span><br><span class='refline'>ref: 12–16</span></th>",
+    "valid_empty": "<td></td>",
+    
+    "invalid_cell_with_na": "<td>N/A</td>",
+    "invalid_with_interpretation": "<td data-page=\"1\"><span class='val high'>16.8 (elevated)</span></td>",
+    "invalid_with_javascript": "<td onclick='alert(\"hi\")'>13.2</td>"
+  }
+}

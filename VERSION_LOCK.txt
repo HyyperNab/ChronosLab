@@ -1,0 +1,29 @@
+ChronosLab Version Lock
+=======================
+
+ACTIVE VERSION: v1.6.0
+STATUS: ARCHITECTURE LOCKED (Constitutional Amendment Ratified)
+DATE: 2026-01-11
+
+PREVIOUS VERSIONS:
+- v1.5.0 - DEPRECATED (OCR + normalization, pre-constitutional fixes)
+- v1.5.1 - SUPERSEDED (constitutional compliance fixes, interactive prompts removed)
+- v1.6.0 - ACTIVE (clinical panel order, index banner, dark teal, em-dash, unified dates)
+
+CONSTITUTIONAL AMENDMENT v1.6.0:
+✓ Clinical panel order (10 panels, NOT alphabetical)
+✓ Index banner navigation (clickable)
+✓ Dark teal panel headers (#1a3a4a)
+✓ Unified date columns (same dates ALL panels)
+✓ Em-dash for missing values (— in gray)
+✓ Patient name in title (Datenschutz: title only)
+✓ French panel display names
+✓ NO superscript flags (removed v2.1)
+✓ NO variable counts (removed v2.2)
+
+ANTI-DRIFT PROTECTION:
+✓ Panel reordering FORBIDDEN
+✓ Renal membership LOCKED (7 analytes)
+✓ NFS suborder FROZEN (12 analytes)
+✓ Core principles IMMUTABLE
+✓ No statistics/trends/interpretation

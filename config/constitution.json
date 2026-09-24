@@ -1,0 +1,232 @@
+{
+  "name": "ChronosLab",
+  "codename": "ALLSTARDS",
+  "status": "HARD_LOCK_CANONICAL",
+  "version": "1.6.0",
+  "core_principles": [
+    "truth_over_completeness",
+    "silence_over_speculation",
+    "determinism_over_cleverness",
+    "clinician_first_readability",
+    "datenschutz_by_design"
+  ],
+  "panel_order": [
+    "NFS",
+    "VS_H1",
+    "VS_H2",
+    "CRP",
+    "COAG",
+    "RENAL",
+    "HEPATIC",
+    "AMYLASE_LIPASE",
+    "LIPIDS",
+    "GLUCOSE_A1C",
+    "NUTRITION",
+    "THYROID",
+    "TUMOR_MARKERS",
+    "MISC"
+  ],
+  "panel_display_names": {
+    "HEMOGRAMME": "Hémogramme (NFS)",
+    "HEMOSTASE": "Hémostase",
+    "INFLAMMATION": "Inflammation",
+    "RENAL": "Rénal",
+    "HEPATIC": "Hépatique",
+    "GLYCEMIE_A1C": "Glycémie / HbA1c",
+    "MINERAUX": "Minéraux",
+    "NUTRITION": "Nutrition",
+    "THYROID": "Thyroïde",
+    "TUMOR_MARKERS": "Marqueurs Tumoraux"
+  },
+  "scope": {
+    "in_scope": [
+      "multi_pdf_lab_ingestion",
+      "ocr_with_bbox_trace",
+      "identity_integrity_gate",
+      "multilingual_lab_extraction",
+      "explicit_unit_normalization",
+      "chronological_timeline",
+      "non_diagnostic_trends",
+      "clinician_cockpit_html",
+      "excel_pdf_exports",
+      "descriptive_cohort_analysis"
+    ],
+    "out_of_scope": [
+      "diagnosis",
+      "therapy_recommendation",
+      "risk_prediction",
+      "clinical_decision_automation"
+    ]
+  },
+  "privacy": {
+    "grade": "GERMAN_STRICT",
+    "pii_in_exports": false,
+    "metadata_scrub": [
+      "pdf",
+      "excel",
+      "html"
+    ],
+    "export_block_on_pii": true,
+    "pii_patterns": [
+      "\\b[A-Z][a-z]{2,}\\s+[A-Z][a-z]{2,}\\s+[A-Z][a-z]{2,}\\b",
+      "\\b\\d{2}[/\\.]\\d{2}[/\\.]\\d{4}\\b",
+      "\\b\\d{10,}\\b"
+    ]
+  },
+  "identity_policy": {
+    "one_patient_per_case": true,
+    "conflict_behavior": "HARD_FAIL",
+    "insufficient_identity": "HARD_FAIL",
+    "minimum_identity_confidence": 0.85
+  },
+  "panel_labels": {
+    "NFS": "Hémogramme (NFS)",
+    "VS_H1": "Vitesse de Sédimentation H1",
+    "VS_H2": "Vitesse de Sédimentation H2",
+    "CRP": "CRP",
+    "COAG": "Coagulation",
+    "RENAL": "Bilan Rénal",
+    "HEPATIC": "Bilan Hépatique",
+    "AMYLASE_LIPASE": "Amylase / Lipase",
+    "LIPIDS": "Bilan Lipidique",
+    "GLUCOSE_A1C": "Glucose / HbA1c",
+    "NUTRITION": "Nutrition",
+    "THYROID": "Thyroïde",
+    "TUMOR_MARKERS": "Marqueurs Tumoraux",
+    "MISC": "Autres"
+  },
+  "nfs_suborder": [
+    "Hemoglobin",
+    "Hematocrit",
+    "MCH",
+    "MCHC",
+    "MCV",
+    "WBC",
+    "Neutrophils",
+    "Lymphocytes",
+    "Monocytes",
+    "Eosinophils",
+    "Basophils",
+    "Platelets"
+  ],
+  "renal_membership_locked": [
+    "Bicarbonate",
+    "Calcium",
+    "Chloride",
+    "Magnesium",
+    "Phosphorus",
+    "Potassium",
+    "Sodium"
+  ],
+  "reference_policy": {
+    "extract_reference_words": true,
+    "languages": [
+      "en",
+      "fr",
+      "de",
+      "nl",
+      "es"
+    ],
+    "never_infer_reference": true,
+    "display_once_per_variable": true,
+    "missing_reference_display": "—",
+    "reference_triggers": {
+      "fr": [
+        "Réf",
+        "Référence",
+        "Normes",
+        "Valeurs usuelles",
+        "Valeur de référence"
+      ],
+      "de": [
+        "Referenz",
+        "Referenzbereich",
+        "Normbereich",
+        "Normalwert",
+        "Norm"
+      ],
+      "en": [
+        "Reference",
+        "Reference range",
+        "Normal range",
+        "Ref",
+        "Normal"
+      ],
+      "nl": [
+        "Referentie",
+        "Normwaarden",
+        "Ref"
+      ],
+      "es": [
+        "Referencia",
+        "Rango de referencia",
+        "Ref"
+      ]
+    }
+  },
+  "canonical_row_required_fields": [
+    "case_id",
+    "doc_id",
+    "page",
+    "datetime",
+    "datetime_precision",
+    "analyte_canonical",
+    "analyte_category",
+    "panel_key",
+    "analyte_order",
+    "value_raw",
+    "value_numeric",
+    "value_type",
+    "unit_raw",
+    "unit_canonical",
+    "flag",
+    "reference_text_raw",
+    "reference_low",
+    "reference_high",
+    "reference_unit_raw",
+    "reference_source_trace",
+    "confidence_parse",
+    "confidence_datetime",
+    "confidence_unit",
+    "source_trace"
+  ],
+  "clinician_cockpit": {
+    "all_panels_collapsible": true,
+    "collapsible_tech": "HTML_DETAILS_SUMMARY",
+    "header_style": "SCANDINAVIAN_FOREST_NAVY",
+    "colors": {
+      "low": "#c1121f",
+      "high": "#0033cc",
+      "forest_navy": "#0a1f2e",
+      "forest_navy_2": "#06202b"
+    },
+    "rules": [
+      "no_pastel",
+      "no_color_without_reference",
+      "no_ai_language",
+      "skip_empty_panels",
+      "render_all_extracted_rows"
+    ],
+    "drop_empty_dates": true
+  },
+  "linting": {
+    "blocking": [
+      "panel_misclassification",
+      "renal_membership_violation",
+      "nfs_suborder_violation",
+      "date_ambiguity",
+      "pii_leak",
+      "missing_required_fields",
+      "duplicate_rows",
+      "incomplete_render"
+    ]
+  },
+  "immutability": {
+    "changes_require": [
+      "version_bump",
+      "rationale",
+      "full_revalidation"
+    ]
+  },
+  "constitution_hash": "2d0dd888736481712cccc5922250a355811ca03af3f9edf4827730f02cd03904"
+}
