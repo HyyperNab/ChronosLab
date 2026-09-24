@@ -1,34 +1,31 @@
-# OCR Infrastructure Documentation
+# OCR Infrastructure
 
 ## Overview
 
-ChronosLab now supports **direct PDF ingestion** with OCR.
+ChronosLab supports **direct PDF ingestion** with OCR.
 
 **Workflow**:
 ```
-Multiple PDFs → OCR → Identity Verification → Data Extraction → Chronological Merge → HTML Cockpit
+Multiple PDFs → OCR → Identity Verification → Table Extraction → Chronological Merge → HTML Cockpit
 ```
 
 ---
 
 ## Components
 
-### 1. OCR Engine (`ocr_engine.py`)
+### 1. OCR Engine (`src/ocr_engine.py`)
 
 **Purpose**: Extract text from PDF lab results using Tesseract
 
 **Key classes**:
-- `PDFOCREngine` - Tesseract wrapper
-- `FrenchReferenceParser` - Parses French reference ranges
+- `PDFOCREngine` — Tesseract wrapper with language auto-fallback
+- `FrenchReferenceParser` — Parses French/German reference ranges
 
 **Usage**:
 ```python
-from ocr_engine import PDFOCREngine, FrenchReferenceParser
+from src.ocr_engine import PDFOCREngine, FrenchReferenceParser
 
-# Initialize
-engine = PDFOCREngine(dpi=300, lang="fra")
-
-# Extract text
+engine = PDFOCREngine(dpi=300, lang="eng+fra+deu")
 pages = engine.extract_from_pdf(Path("lab_results.pdf"))
 
 for page in pages:
@@ -37,7 +34,6 @@ for page in pages:
 
 **Reference parsing**:
 ```python
-# Parse French reference ranges
 low, high, conf = FrenchReferenceParser.parse("Réf: 12.0 - 16.0")
 # → low=12.0, high=16.0, conf="HIGH"
 
@@ -54,22 +50,20 @@ low, high, conf = FrenchReferenceParser.parse("< 5")
 
 ---
 
-### 2. Identity Clustering (`identity_clustering.py`)
+### 2. Identity Clustering (`src/identity_clustering.py`)
 
-**Purpose**: Verify multiple PDFs belong to same patient
+**Purpose**: Verify multiple PDFs belong to the same patient
 
 **Signals used**:
-- Patient name
+- Patient name (regex extraction)
 - Date of birth (DOB)
 - Patient ID (optional)
 
 **Identity verification**:
 ```python
-from identity_clustering import PatientIdentityClusterer
+from src.identity_clustering import PatientIdentityClusterer
 
 clusterer = PatientIdentityClusterer()
-
-# Extract identity from OCR text
 identity = clusterer.extract_identity(ocr_text, doc_id="DOC-001")
 
 print(f"Name: {identity.name}")
@@ -77,121 +71,91 @@ print(f"DOB: {identity.dob}")
 print(f"Confidence: {identity.confidence:.1%}")
 ```
 
-**Mismatch handling**:
+**Mismatch handling** (HARD FAIL — no user interaction):
 ```python
-# Verify all documents match
-identities = [identity1, identity2, identity3]
-
 try:
-    same_patient = clusterer.verify_same_patient(
-        identities,
-        interactive=True  # Ask user if mismatch
-    )
+    same_patient = clusterer.verify_same_patient(identities)
 except IdentityMismatchError as e:
-    # HARD STOP - documents do not match
+    # HARD STOP — documents do not match
+    # No prompt, no fallback, no user interaction
     print(f"Error: {e}")
 ```
 
-**Interactive mode**:
-If identity mismatch detected, user is prompted:
-```
-⚠️  IDENTITY MISMATCH DETECTED
-============================================================
-  Names: DUPONT JEAN, MARTIN PIERRE
-  DOBs: 1975-03-15, 1980-07-22
-
-Documents:
-  1. lab_jan.pdf
-     Name: DUPONT JEAN
-     DOB: 1975-03-15
-  2. lab_feb.pdf
-     Name: MARTIN PIERRE
-     DOB: 1980-07-22
-============================================================
-
-Are these documents for the SAME patient? (Y/N):
-```
-
-If user answers **N** → HARD STOP  
-If user answers **Y** → Processing continues
+If a mismatch is detected, processing stops immediately with an
+`IdentityMismatchError`. This is a constitutional requirement: no
+interactive prompts (removed in v1.5.1).
 
 ---
 
-### 3. Multi-PDF Processor (`pdf_processor.py`)
+### 3. Table Extraction (`src/table_extraction.py`)
+
+**Purpose**: Detect and extract structured data from OCR bounding boxes
+
+**Implementation** (fully implemented — not a placeholder):
+- `TableExtractor` — groups OCR boxes into rows/columns by geometry
+- `LabDataParser` — classifies columns (analyte/value/unit/reference),
+  parses values, normalizes analyte names, assigns flags
+
+**Column detection**:
+- Groups boxes by Y-position (rows, tolerance: 15px)
+- Clusters X-positions into column boundaries (tolerance: 20px)
+- Splits tables by vertical gaps (>50px)
+- Classifies columns: >70% numeric → value, >50% unit-pattern → unit,
+  >50% ref-pattern → reference, else → analyte
+
+**Value parsing**:
+- Qualitative: NEG/POS/NEGATIF/POSITIF → `ValueType.QUALITATIVE`
+- Inequalities: `<5` → numeric + LOW flag, `>100` → numeric + HIGH flag
+- Numeric: `float()` with comma→dot conversion
+- Flag determination: value vs reference range → LOW/HIGH/NORMAL
+
+---
+
+### 4. Multi-PDF Processor (`src/pdf_processor.py`)
 
 **Purpose**: Orchestrate complete PDF ingestion workflow
 
 **Workflow**:
-1. OCR each PDF
-2. Extract identity from each
-3. Verify same patient (**HARD STOP** if mismatch)
-4. Extract lab data
-5. Merge chronologically
-6. Generate case JSON
+1. OCR each PDF (Tesseract, 300 DPI)
+2. Extract identity from each (regex: name, DOB, patient ID)
+3. Verify same patient (**HARD STOP** if mismatch — no interaction)
+4. Extract sample date (**HARD STOP** if missing — no fallback)
+5. Extract lab data (table extraction + normalization)
+6. Assign panels via `ConfigLoader.resolve_analyte()`
+7. Merge chronologically
+8. Generate case JSON
 
 **Usage**:
 ```python
-from pdf_processor import MultiPDFProcessor
+from src.pdf_processor import MultiPDFProcessor
+from src.config import ConfigLoader
 
-processor = MultiPDFProcessor(ocr_dpi=300, lang="fra")
+processor = MultiPDFProcessor(
+    ocr_dpi=300,
+    lang="eng+fra+deu",
+    config_loader=ConfigLoader(Path("config")),  # Required for panel assignment
+)
 
 result = processor.process_multiple_pdfs(
-    pdf_paths=[
-        Path("lab_jan.pdf"),
-        Path("lab_feb.pdf"),
-        Path("lab_mar.pdf")
-    ],
+    pdf_paths=[Path("lab_jan.pdf"), Path("lab_feb.pdf")],
     output_dir=Path("output"),
-    interactive=True
 )
 
 print(f"Case ID: {result['case_id']}")
 print(f"Rows extracted: {result['rows_extracted']}")
-print(f"Case JSON: {result['case_json_path']}")
 ```
 
 ---
 
 ## Command-Line Usage
 
-### Demo Script
+### Demo Scripts
 ```bash
+# JSON path (no Tesseract needed)
+python demo.py
+
+# PDF path (requires Tesseract + language packs)
 python demo_ocr.py lab1.pdf lab2.pdf lab3.pdf
-```
-
-**What it does**:
-1. OCR all PDFs
-2. Extract patient identity
-3. Verify same patient (asks if mismatch)
-4. Extract lab results
-5. Generate HTML cockpit
-
-**Example output**:
-```
-Processing 3 PDFs:
-  1. lab_jan_2024.pdf
-  2. lab_feb_2024.pdf
-  3. lab_mar_2024.pdf
-
-Processing: lab_jan_2024.pdf
-  OCR: 2 pages at 300 DPI
-  Avg confidence: 92.3%
-  Identity: DUPONT JEAN / 1975-03-15
-
-Processing: lab_feb_2024.pdf
-  OCR: 1 page at 300 DPI
-  Avg confidence: 89.7%
-  Identity: DUPONT JEAN / 1975-03-15
-
-✓ Identity verified: All documents match
-
-Extracted 47 lab results
-Saved: output/PAT-12345_extracted.json
-
-Generating HTML cockpit...
-✓ SUCCESS
-
-Open: output/PAT-12345/clinician_cockpit_table_ft.html
 ```
 
 ---
@@ -199,193 +163,54 @@ Open: output/PAT-12345/clinician_cockpit_table_ft.html
 ## OCR Configuration
 
 ### Tesseract Language
-Default: **French** (`fra`)
+Default: `eng+fra+deu` (multilingual, auto-fallback to available)
 
-To change:
 ```python
-engine = PDFOCREngine(dpi=300, lang="eng")  # English
+engine = PDFOCREngine(dpi=300, lang="fra")  # French only
 ```
-
-Available languages (if installed):
-- `fra` - French
-- `eng` - English
-- `deu` - German
-- `ita` - Italian
-- `spa` - Spanish
 
 ### DPI Setting
-Default: **300 DPI**
+Default: **300 DPI** (recommended balance of accuracy and speed)
 
-Higher DPI = better accuracy, slower processing:
-```python
-engine = PDFOCREngine(dpi=400, lang="fra")  # Higher quality
-```
-
-Recommended:
-- 300 DPI: Standard quality, good balance
-- 400 DPI: High quality for poor scans
-- 200 DPI: Fast processing, acceptable quality
+| DPI | Use case |
+|-----|----------|
+| 200 | Fast processing, acceptable quality |
+| 300 | Standard (recommended) |
+| 400 | High quality for poor scans |
 
 ---
 
 ## Error Handling
 
 ### OCR Failures
-```python
-from ocr_engine import OCRError
-
-try:
-    pages = engine.extract_from_pdf(pdf_path)
-except OCRError as e:
-    print(f"OCR failed: {e}")
-```
-
-**OCR error signals**:
-- `OCRError` - PDF rendering or OCR failure
-- Low confidence warning logged if avg < 70%
+- `OCRError` — PDF rendering or OCR failure
+- Low confidence warning logged if average < 70%
 
 ### Identity Mismatch
-```python
-from identity_clustering import IdentityMismatchError
+- `IdentityMismatchError` — HARD STOP, no user interaction
+- Constitutional requirement (v1.5.1): interactive prompts removed
 
-try:
-    clusterer.verify_same_patient(identities, interactive=False)
-except IdentityMismatchError as e:
-    print(f"Not same patient: {e}")
-    # HARD STOP
-```
-
-**Non-interactive mode**: Raises error immediately  
-**Interactive mode**: Asks user for confirmation
-
----
-
-## Data Flow
-
-```
-PDF Files
-  ↓
-OCR (Tesseract)
-  ↓
-Identity Extraction
-  ├─ Name (regex)
-  ├─ DOB (date parser)
-  └─ Patient ID (regex)
-  ↓
-Identity Verification
-  ├─ Match → Continue
-  └─ Mismatch → Ask user or HARD STOP
-  ↓
-Table Extraction (TODO)
-  ├─ Detect tables
-  ├─ Extract columns
-  └─ Parse rows
-  ↓
-Canonical Rows
-  ↓
-Chronological Sort
-  ↓
-Case JSON
-  ↓
-ChronosLab Renderer
-  ↓
-HTML Cockpit
-```
-
----
-
-## TODO: Table Extraction
-
-**Current status**: Identity verification works, table extraction is **PLACEHOLDER**
-
-**Next steps**:
-1. Implement table detection from OCR boxes
-2. Column alignment (analyte, value, unit, reference)
-3. Row parsing
-4. Value type detection (numeric vs qualitative)
-5. Reference range extraction using `FrenchReferenceParser`
-
-**Approach**:
-- Use OCR bounding boxes to detect table structure
-- Group boxes by vertical alignment (rows)
-- Classify columns by position and content
-- Extract values and parse types
+### Missing Sample Date
+- `PDFProcessingError` — HARD STOP, no fallback
+- Document must contain "Date du prélèvement", "Prélevé le", or similar
 
 ---
 
 ## Dependencies
 
-**New requirements**:
 ```
 pytesseract>=0.3.10    # Tesseract wrapper
 pdf2image>=1.16.0      # PDF to image conversion
 Pillow>=10.0.0         # Image processing
-pdfplumber>=0.10.0     # PDF text extraction
+pdfplumber>=0.10.0     # PDF text extraction (optional)
 ```
 
 **System requirements**:
 - Tesseract OCR engine installed
-  - Ubuntu/Debian: `apt-get install tesseract-ocr tesseract-ocr-fra`
+  - Ubuntu/Debian: `apt-get install tesseract-ocr tesseract-ocr-fra tesseract-ocr-deu`
   - macOS: `brew install tesseract tesseract-lang`
   - Windows: Download from GitHub
 
 ---
 
-## Testing
-
-### Test Reference Parser
-```bash
-cd chronoslab
-python src/ocr_engine.py
-```
-
-### Test Identity Extraction
-```bash
-python src/identity_clustering.py
-```
-
-### Test Full Workflow
-```bash
-python demo_ocr.py path/to/lab1.pdf path/to/lab2.pdf
-```
-
----
-
-## Production Checklist
-
-Before using in production:
-
-- [ ] Install Tesseract system package
-- [ ] Install French language data (`tesseract-ocr-fra`)
-- [ ] Test OCR on sample PDFs
-- [ ] Verify identity extraction accuracy
-- [ ] Implement table extraction (currently TODO)
-- [ ] Test multi-PDF workflow end-to-end
-- [ ] Configure logging level
-- [ ] Set up error monitoring
-
----
-
-## Known Limitations
-
-1. **Table extraction not implemented** - Placeholder in `_extract_lab_rows()`
-2. **Single-page table assumption** - Tables spanning pages not handled
-3. **Language**: French only (easily extensible)
-4. **Reference formats**: Common French formats supported
-5. **Identity signals**: Assumes standard lab report format
-
----
-
-## Next Development Phase
-
-Priority order:
-1. Implement table detection from OCR boxes
-2. Column classification (analyte, value, unit, ref)
-3. Row extraction and parsing
-4. Value type detection (numeric vs qualitative)
-5. Multi-language support (DE, EN)
-6. Complex table handling (merged cells, spans)
-
----
-
-**Status**: Foundation complete, table extraction pending.
+**Status**: Fully implemented. All components operational.

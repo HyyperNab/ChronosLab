@@ -268,7 +268,7 @@ class FrenchReferenceParser:
                     low = cls._parse_number(match.group(1))
                     high = cls._parse_number(match.group(2))
                     return (low, high, "HIGH")
-                except:
+                except (ValueError, TypeError):
                     continue
         
         # Try inequality patterns (< or >)
@@ -278,7 +278,7 @@ class FrenchReferenceParser:
             try:
                 val = cls._parse_number(match.group(1))
                 return (None, val, "LOW")  # Upper bound only
-            except:
+            except (ValueError, TypeError):
                 pass
         
         # ">10" pattern
@@ -287,7 +287,7 @@ class FrenchReferenceParser:
             try:
                 val = cls._parse_number(match.group(1))
                 return (val, None, "LOW")  # Lower bound only
-            except:
+            except (ValueError, TypeError):
                 pass
         
         return (None, None, "LOW")

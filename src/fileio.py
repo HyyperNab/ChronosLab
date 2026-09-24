@@ -66,7 +66,7 @@ def atomic_write(
         try:
             if 'temp_path' in locals():
                 os.unlink(temp_path)
-        except:
+        except OSError:
             pass
         raise FileIOError(f"Failed to write {path}: {e}")
 

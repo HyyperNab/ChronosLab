@@ -206,12 +206,19 @@ class ConfigLoader:
     
     @staticmethod
     def _compute_file_hash(filepath: Path) -> str:
-        """Compute SHA256 hash of file content"""
-        sha256 = hashlib.sha256()
-        with open(filepath, 'rb') as f:
-            for chunk in iter(lambda: f.read(4096), b''):
-                sha256.update(chunk)
-        return sha256.hexdigest()
+        """Compute SHA256 hash of normalized JSON content.
+        
+        SPOF FIX: Previously hashed raw file bytes, but save_constitution_hash()
+        hashes normalized JSON (sort_keys=True). These NEVER matched, making
+        verify_hash=True always fail. Now both use the same normalized-JSON
+        approach so tamper detection actually works.
+        """
+        import json as _json
+        with open(filepath, 'r', encoding='utf-8') as f:
+            data = _json.load(f)
+        data.pop("constitution_hash", None)  # Exclude hash from its own computation
+        normalized = _json.dumps(data, sort_keys=True, indent=2)
+        return hashlib.sha256(normalized.encode('utf-8')).hexdigest()
     
     def save_constitution_hash(self) -> None:
         """Compute and save constitution hash"""
@@ -236,6 +243,7 @@ class ConfigLoader:
         
         try:
             safe_write_json(constitution_path, data)
-            print(f"Constitution hash saved: {hash_value[:16]}...")
+            logger = get_logger()
+            logger.info(f"Constitution hash saved: {hash_value[:16]}...")
         except FileIOError as e:
             raise ConfigurationError(f"Cannot save constitution hash: {e}")
